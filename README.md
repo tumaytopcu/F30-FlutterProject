@@ -6,6 +6,7 @@
  - Tümay Topçu: Scrum Master
  - Ramazan Aydınlı: Team Member / Developer
  - Züleyha Akbaş: Team Member / Developer
+ - Eyüp Caklı: Aktif Olmayan Üye
  #### Ürün İsmi
  --App--
  #### Ürün Açıklaması
