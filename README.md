@@ -19,6 +19,6 @@
  - Blablablabla2
  - Blablablabla3
  #### Product Baclog URL
- [F-30 Backlog Board](https://github.com/users/tumaytopcu/projects/1/views/1?layout=board)
+ 
  
 
