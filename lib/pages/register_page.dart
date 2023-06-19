@@ -1,23 +1,23 @@
-import 'dart:developer';
+import 'dart:html';
 
-import 'package:f30_bootcamp/pages/register_page.dart';
 import 'package:flutter/material.dart';
 
-class LoginPage extends StatefulWidget {
+class RegisterPage extends StatefulWidget {
   @override
-  _LoginPageState createState() => _LoginPageState();
+  _RegisterPageState createState() => _RegisterPageState();
 }
 
-class _LoginPageState extends State<LoginPage> {
+class _RegisterPageState extends State<RegisterPage> {
   String username = "";
   String password = "";
+  String email = "";
   final _formkey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
-        title: Text('Login Page'),
+        title: Text('Register Page'),
       ),
       body: Form(
           key: _formkey,
@@ -32,13 +32,13 @@ class _LoginPageState extends State<LoginPage> {
                     focusedBorder: OutlineInputBorder(
                       borderSide: BorderSide(color: Colors.black),
                     ),
-                    labelText: "Kullanıcı Adı",
+                    labelText: "Email",
                     labelStyle: TextStyle(color: Colors.blue),
                     border: OutlineInputBorder(),
                   ),
                   validator: (value) {
                     if (value != null && value.isEmpty) {
-                      return "Kullanıcı adını giriniz!";
+                      return "Email giriniz!";
                     } else {
                       return null;
                     }
@@ -56,13 +56,13 @@ class _LoginPageState extends State<LoginPage> {
                     focusedBorder: OutlineInputBorder(
                       borderSide: BorderSide(color: Colors.black),
                     ),
-                    labelText: "Şifre",
+                    labelText: "Kullanıcı Adı",
                     labelStyle: TextStyle(color: Colors.blue),
                     border: OutlineInputBorder(),
                   ),
                   validator: (value) {
                     if (value != null && value.isEmpty) {
-                      return "Şifrenizi giriniz!";
+                      return "Kullanıcı adı giriniz!";
                     } else {
                       return null;
                     }
@@ -71,35 +71,43 @@ class _LoginPageState extends State<LoginPage> {
                     password = value!;
                   },
                 ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: <Widget>[
-                    MaterialButton(
-                      child: Text("Üye Ol"),
-                      onPressed: () {
-                        Navigator.of(context).push(MaterialPageRoute(
-                            builder: (context) => RegisterPage()));
-                      },
-                    ),
-                    MaterialButton(
-                      child: Text("Şifremi Unuttum"),
-                      onPressed: () {},
-                    ),
-                  ],
+                SizedBox(
+                  height: 10.0,
                 ),
-                _loginButton()
+                TextFormField(
+                  //autovalidateMode: AutovalidateMode.always,
+                  decoration: InputDecoration(
+                    focusedBorder: OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.black),
+                    ),
+                    labelText: "Şifre",
+                    labelStyle: TextStyle(color: Colors.blue),
+                    border: OutlineInputBorder(),
+                  ),
+                  validator: (value) {
+                    if (value != null && value.isEmpty) {
+                      return "Şifre giriniz!";
+                    } else {
+                      return null;
+                    }
+                  },
+                  onSaved: (value) {
+                    email = value!;
+                  },
+                ),
+                _registerButton()
               ],
             ),
           )),
     );
   }
 
-  Widget _loginButton() => ElevatedButton(
+  Widget _registerButton() => ElevatedButton(
         onPressed: () {
           if (_formkey.currentState!.validate()) {
             _formkey.currentState!.save();
           }
         },
-        child: Text("Giriş Yap"),
+        child: Text("Kayıt Ol"),
       );
 }
