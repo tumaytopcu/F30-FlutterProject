@@ -43,8 +43,8 @@
 
 ## Sprint 1
 
-Tahmini olarak Sprint içinde tamamlanacak puan: 200 Puan
- - Puan tamamlama mantığı: İlk sprintte 40 puan tamamlanması öngörülmüş, 20 puan tamamlanmıştır. 
+Tahmini olarak Sprint içinde tamamlanacak puan: 195 Puan
+ - Puan tamamlama mantığı: İlk sprintte 40 puan tamamlanması öngörülmüş, 20 puan tamamlanmıştır. Done olarak işaretlediğimiz iki issue burada gözükmediğinden onları da toplam puana dahil ettik. 
  - <img width="625" alt="image" src="https://github.com/tumaytopcu/F30-FlutterProject/assets/34829265/e4176918-6b83-4a41-8bcd-837bda00f842">
  - Daily Scrum: https://docs.google.com/document/d/14t0k-wBChS1xkkr88MQrGSAHqFUcen8ALDubOBwjI14/edit?usp=sharing 
  - Sprint Board Güncellemesi: <img width="955" alt="Ekran görüntüsü 2023-06-19 223555" src="https://github.com/tumaytopcu/F30-FlutterProject/assets/34829265/704126ae-2d9b-49d8-a329-d24872a6d066">
