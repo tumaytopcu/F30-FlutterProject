@@ -15,7 +15,7 @@
  - EcoPazar
  
  #### Ürün Açıklaması
- - EcoPazar App, yerel tarım üreticilerini ve onların yol kenarları veya kendi bahçelerinde satış yapmalarını sağlar. Bu uygulama sayesinde, insanlar yolculukları sırasında yerel meyve ve sebze satıcılarını kolaylıkla bulabilir ve doğrudan üreticiden alışveriş yapabilirler. Uygulama, tarım aktivitesini teşvik etmeyi amaçlar ve hem ücretli hem de ücretsiz satış imkanı sağlar. Yerel Rekolte App, yerel ekonomiye ve sürdürülebilir tarıma katkı sağlama fikrini savunur ve tüketicilerin doğrudan üreticilerden alışveriş yapmasını teşvik eder.
+ - EcoPazar App, yerel tarım üreticilerini ve onların yol kenarları veya kendi bahçelerinde satış yapmalarını sağlar. Bu uygulama sayesinde, insanlar yolculukları sırasında yerel meyve ve sebze satıcılarını kolaylıkla bulabilir ve doğrudan üreticiden alışveriş yapabilirler. Uygulama, tarım aktivitesini teşvik etmeyi amaçlar ve hem ücretli hem de ücretsiz satış imkanı sağlar. EcoPazar App, yerel ekonomiye ve sürdürülebilir tarıma katkı sağlama fikrini savunur ve tüketicilerin doğrudan üreticilerden alışveriş yapmasını teşvik eder.
  
  ##### Uygulamanın birincil fonksiyonu: 
  - Kullanıcılar, yolculukları sırasında en yakın meyve ve sebze satıcılarını uygulama üzerinden bulabilir ve onlardan alışveriş yapabilir.
@@ -44,12 +44,14 @@
 ## Sprint 1
 
 Tahmini olarak Sprint içinde tamamlanacak puan: -- Puan
- - Puan tamamlama mantığı: Projede tamamlanması gereken toplam 350 puanlık bir backlog hazırlanacaktır, henüz konuya 18.06.2023'te karar verildiği iiçin backlog halen geliştirme aşamasındadır.
+ - Puan tamamlama mantığı: --
  - Daily Scrum: https://docs.google.com/document/d/14t0k-wBChS1xkkr88MQrGSAHqFUcen8ALDubOBwjI14/edit?usp=sharing 
  - Sprint Board Güncellemesi: Raporlarımızı tam anlamıyla oluşturamadığımız için bu Sprint için rapor paylaşılamamıştır. 
  - Ürün Durumu: Ürünle ilgili backlog oluşturulmaya devam edilmektedir, şimdilik bir login sayfası hazırlanmıştır. 
  - ![MicrosoftTeams-image (43)](https://github.com/tumaytopcu/F30-FlutterProject/assets/34829265/cf1263f2-cd73-483b-aff0-3bc5ef4166f2)
 
+#### Sprint Notu
+- Sprintimizin çoğunu uygulama fikri bulma ile geçirdik, Sprintin son günü projemize yeni karar verdiğimiz için backlogu yeni hazırlamaya başladık. 
 
 #### Sprint Review
  ##### Alınan kararlar: 
