@@ -46,12 +46,14 @@
 Tahmini olarak Sprint içinde tamamlanacak puan: -- Puan
  - Puan tamamlama mantığı: --
  - Daily Scrum: https://docs.google.com/document/d/14t0k-wBChS1xkkr88MQrGSAHqFUcen8ALDubOBwjI14/edit?usp=sharing 
- - Sprint Board Güncellemesi: Raporlarımızı tam anlamıyla oluşturamadığımız için bu Sprint için rapor paylaşılamamıştır. 
+ - Sprint Board Güncellemesi: <img width="955" alt="Ekran görüntüsü 2023-06-19 223555" src="https://github.com/tumaytopcu/F30-FlutterProject/assets/34829265/704126ae-2d9b-49d8-a329-d24872a6d066">
  - Ürün Durumu: Ürünle ilgili backlog oluşturulmaya devam edilmektedir, şimdilik bir login sayfası hazırlanmıştır. 
  - ![MicrosoftTeams-image (43)](https://github.com/tumaytopcu/F30-FlutterProject/assets/34829265/cf1263f2-cd73-483b-aff0-3bc5ef4166f2)
+ - ![WhatsApp Görsel 2023-06-19 saat 21 44 51](https://github.com/tumaytopcu/F30-FlutterProject/assets/34829265/9483d4e0-940a-4990-939a-d23cab0e329b)
+
 
 #### Sprint Notu
-- Sprintimizin çoğunu uygulama fikri bulma ile geçirdik, Sprintin son günü projemize yeni karar verdiğimiz için backlogu yeni hazırlamaya başladık. 
+- Sprintimizin çoğunu uygulama fikri bulma ile geçirdik, Sprintin son günü projemize yeni karar verdiğimiz için backlogu yeni hazırlamaya başladık. Halen geliştirmekte olduğumuz backlogumuz UX/UI kısmını netleştirdikçe daha iyi bir hal alacak. 
 
 #### Sprint Review
  ##### Alınan kararlar: 
