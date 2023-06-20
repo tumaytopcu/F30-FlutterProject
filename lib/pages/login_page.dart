@@ -17,7 +17,8 @@ class _LoginPageState extends State<LoginPage> {
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
-        title: Text('Login Page'),
+        title: Center(
+            child: Text('Login Page')),
       ),
       body: Form(
           key: _formkey,
@@ -51,6 +52,7 @@ class _LoginPageState extends State<LoginPage> {
                   height: 10.0,
                 ),
                 TextFormField(
+                  obscureText: true,
                   //autovalidateMode: AutovalidateMode.always,
                   decoration: InputDecoration(
                     focusedBorder: OutlineInputBorder(
