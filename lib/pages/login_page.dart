@@ -1,6 +1,6 @@
-import 'dart:developer';
 
 import 'package:f30_bootcamp/pages/register_page.dart';
+import 'package:f30_bootcamp/pages/sifremi_unuttum.dart';
 import 'package:flutter/material.dart';
 
 class LoginPage extends StatefulWidget {
@@ -85,7 +85,10 @@ class _LoginPageState extends State<LoginPage> {
                     ),
                     MaterialButton(
                       child: Text("Şifremi Unuttum"),
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.of(context).push(MaterialPageRoute(
+                            builder: (context) => SifrePage()));
+                      },
                     ),
                   ],
                 ),
