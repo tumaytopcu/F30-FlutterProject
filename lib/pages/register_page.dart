@@ -7,7 +7,7 @@ class RegisterPage extends StatefulWidget {
   @override
   _RegisterPageState createState() => _RegisterPageState();
 }
-
+bool obscurePassword = true;
 class _RegisterPageState extends State<RegisterPage> {
   String username = "";
   String password = "";
@@ -76,6 +76,7 @@ class _RegisterPageState extends State<RegisterPage> {
                 height: 10.0,
               ),
               TextFormField(
+                obscureText: obscurePassword,
                 //autovalidateMode: AutovalidateMode.always,
                 decoration: InputDecoration(
                   focusedBorder: OutlineInputBorder(
@@ -84,6 +85,16 @@ class _RegisterPageState extends State<RegisterPage> {
                   labelText: "Şifre",
                   labelStyle: TextStyle(color: Colors.blue),
                   border: OutlineInputBorder(),
+                  suffixIcon: GestureDetector(
+                    onTap: () {
+                      setState(() {
+                        obscurePassword = !obscurePassword; // Şifre görünürlüğünü değiştir
+                      });
+                    },
+                    child: Icon(
+                      obscurePassword ? Icons.visibility_off : Icons.visibility,
+                    ),
+                  ),
                 ),
                 validator: (value) {
                   if (value != null && value.isEmpty) {
@@ -96,6 +107,8 @@ class _RegisterPageState extends State<RegisterPage> {
                   password = value!;
                 },
               ),
+              SizedBox(
+                height: 10.0,),
               _registerButton()
             ],
           ),
@@ -103,6 +116,7 @@ class _RegisterPageState extends State<RegisterPage> {
       ),
     );
   }
+
 
   Widget _registerButton() => ElevatedButton(
         onPressed: () {

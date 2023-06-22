@@ -1,4 +1,4 @@
-
+import 'package:f30_bootcamp/pages/home_page.dart';
 import 'package:f30_bootcamp/pages/register_page.dart';
 import 'package:f30_bootcamp/pages/sifremi_unuttum.dart';
 import 'package:flutter/material.dart';
@@ -7,7 +7,7 @@ class LoginPage extends StatefulWidget {
   @override
   _LoginPageState createState() => _LoginPageState();
 }
-
+bool obscurePassword = true;
 class _LoginPageState extends State<LoginPage> {
   String username = "";
   String password = "";
@@ -51,8 +51,9 @@ class _LoginPageState extends State<LoginPage> {
                 SizedBox(
                   height: 10.0,
                 ),
+
                 TextFormField(
-                  obscureText: true,
+                  obscureText: obscurePassword,
                   //autovalidateMode: AutovalidateMode.always,
                   decoration: InputDecoration(
                     focusedBorder: OutlineInputBorder(
@@ -61,6 +62,16 @@ class _LoginPageState extends State<LoginPage> {
                     labelText: "Şifre",
                     labelStyle: TextStyle(color: Colors.blue),
                     border: OutlineInputBorder(),
+                    suffixIcon: GestureDetector(
+                      onTap: () {
+                        setState(() {
+                          obscurePassword = !obscurePassword; // Şifre görünürlüğünü değiştir
+                        });
+                      },
+                      child: Icon(
+                        obscurePassword ? Icons.visibility_off : Icons.visibility,
+                      ),
+                    ),
                   ),
                   validator: (value) {
                     if (value != null && value.isEmpty) {
@@ -92,7 +103,8 @@ class _LoginPageState extends State<LoginPage> {
                     ),
                   ],
                 ),
-                _loginButton()
+                _loginButton(
+                )
               ],
             ),
           )),
@@ -101,10 +113,14 @@ class _LoginPageState extends State<LoginPage> {
 
   Widget _loginButton() => ElevatedButton(
         onPressed: () {
-          if (_formkey.currentState!.validate()) {
-            _formkey.currentState!.save();
+          if (_formkey.currentState!.validate())
+          {_formkey.currentState!.save();
+          Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => HomePage()));
           }
         },
         child: Text("Giriş Yap"),
+
       );
 }
