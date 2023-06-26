@@ -35,13 +35,15 @@ class _LoginPageState extends State<LoginPage> {
                   focusedBorder: OutlineInputBorder(
                     borderSide: BorderSide(color: Colors.black),
                   ),
-                  labelText: "Kullanıcı Adı",
+                  hintText: "+90 555 555 55 55",
+                  hintStyle: TextStyle(color: Colors.grey),
+                  labelText: "Telefon",
                   labelStyle: TextStyle(color: Colors.blue),
                   border: OutlineInputBorder(),
                 ),
                 validator: (value) {
                   if (value != null && value.isEmpty) {
-                    return "Kullanıcı adını giriniz!";
+                    return "Telefon numarası giriniz!";
                   } else {
                     return null;
                   }
@@ -55,7 +57,7 @@ class _LoginPageState extends State<LoginPage> {
                 obscureText: obscurePassword,
                 decoration: InputDecoration(
                   focusedBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: Colors.black),
+                    borderSide: BorderSide(color: Colors.blue),
                   ),
                   labelText: "Şifre",
                   labelStyle: TextStyle(color: Colors.blue),
@@ -73,7 +75,7 @@ class _LoginPageState extends State<LoginPage> {
                 ),
                 validator: (value) {
                   if (value != null && value.isEmpty) {
-                    return "Şifrenizi giriniz!";
+                    return "Şifre giriniz!";
                   } else {
                     return null;
                   }
@@ -101,6 +103,14 @@ class _LoginPageState extends State<LoginPage> {
                 ],
               ),
               _loginButton(),
+              SizedBox(
+                height: 20.0,
+              ),
+              _googleButton(),
+              SizedBox(
+                height: 50.0,
+              ),
+              _withoutRegisterButton(),
             ],
           ),
         ),
@@ -109,23 +119,40 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   Widget _loginButton() => ElevatedButton(
-    onPressed: () {
-      if (_formKey.currentState!.validate()) {
-        String username = usernameController.text;
-        String password = passwordController.text;
-        // Burada giriş işlemlerini yapabilirsiniz
+        onPressed: () {
+          if (_formKey.currentState!.validate()) {
+            String username = usernameController.text;
+            String password = passwordController.text;
+            // Burada giriş işlemlerini yapabilirsiniz
 
-        // Giriş işleminden sonra kullanıcı adı ve şifre alanlarını temizle
-        usernameController.clear();
-        passwordController.clear();
+            // Giriş işleminden sonra kullanıcı adı ve şifre alanlarını temizle
+            usernameController.clear();
+            passwordController.clear();
 
-        Navigator.push(
-          context,
-          MaterialPageRoute(builder: (context) => HomePage()),
-        );
-      }
-    },
-    child: Text("Giriş Yap"),
-  );
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => HomePage()),
+            );
+          }
+        },
+        child: Text("Giriş Yap"),
+      );
+  Widget _googleButton() => FloatingActionButton.extended(
+        onPressed: () {},
+        icon: Image.asset(
+          'images/google_logo.png',
+          height: 32,
+          width: 32,
+        ),
+        label: Text("Google ile Giriş Yap"),
+        backgroundColor: Colors.white,
+        foregroundColor: Colors.blue,
+      );
+  Widget _withoutRegisterButton() => FloatingActionButton.extended(
+        onPressed: () {},
+        label: Text("Üye olmadan devam et"),
+        extendedTextStyle: const TextStyle(fontSize: 10),
+        backgroundColor: Colors.white,
+        foregroundColor: Colors.blue,
+      );
 }
-
