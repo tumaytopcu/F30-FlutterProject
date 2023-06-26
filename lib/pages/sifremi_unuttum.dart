@@ -28,13 +28,13 @@ class _SifrePageState extends State<SifrePage> {
                   focusedBorder: OutlineInputBorder(
                     borderSide: BorderSide(color: Colors.black),
                   ),
-                  labelText: "Email",
+                  labelText: "Telefon",
                   labelStyle: TextStyle(color: Colors.blue),
                   border: OutlineInputBorder(),
                 ),
                 validator: (value) {
                   if (value != null && value.isEmpty) {
-                    return "Email giriniz!";
+                    return "Telefon giriniz!";
                   } else {
                     return null;
                   }
@@ -60,6 +60,6 @@ class _SifrePageState extends State<SifrePage> {
             _formkey.currentState!.save();
           }
         },
-        child: Text("Şifre Gönder"),
+        child: Text("Tek Kullanımlık Şifre Gönder"),
       );
 }
