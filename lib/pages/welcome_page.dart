@@ -1,5 +1,7 @@
+import 'package:f30_bootcamp/pages/login_page.dart';
 import 'package:flutter/material.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
+
 
 
 class WelcomePage extends StatelessWidget {
@@ -42,9 +44,14 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
           },
           children: [
             Container(
-              color: Colors.pink[300],
+              color: Colors.grey.shade400,
               child: Center(
-                child: Text('birinci sayfa'),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Image.asset('images/ww1.png'), // Görsel ekleniyor
+                  ],
+                ),
               ),
             ),
             Container(
@@ -80,7 +87,12 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
 
                 if (onLastPage)
                   GestureDetector(
-                    onTap: () {},
+                    onTap: () {
+
+                      Navigator.of(context).push(
+                        MaterialPageRoute(builder: (context) => LoginPage()),
+                      );
+                    },
                     child: Text('Done'),
 
                   )
