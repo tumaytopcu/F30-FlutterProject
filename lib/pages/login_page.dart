@@ -149,7 +149,12 @@ class _LoginPageState extends State<LoginPage> {
         foregroundColor: Colors.blue,
       );
   Widget _withoutRegisterButton() => FloatingActionButton.extended(
-        onPressed: () {},
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => HomePage()),
+          );
+        },
         label: Text("Üye olmadan devam et"),
         extendedTextStyle: const TextStyle(fontSize: 10),
         backgroundColor: Colors.white,
