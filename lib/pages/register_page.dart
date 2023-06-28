@@ -1,4 +1,3 @@
-
 import 'dart:io';
 
 import 'package:flutter/material.dart';
@@ -7,7 +6,9 @@ class RegisterPage extends StatefulWidget {
   @override
   _RegisterPageState createState() => _RegisterPageState();
 }
+
 bool obscurePassword = true;
+
 class _RegisterPageState extends State<RegisterPage> {
   String username = "";
   String password = "";
@@ -57,13 +58,13 @@ class _RegisterPageState extends State<RegisterPage> {
                   focusedBorder: OutlineInputBorder(
                     borderSide: BorderSide(color: Colors.black),
                   ),
-                  labelText: "Kullanıcı Adı",
+                  labelText: "Telefon",
                   labelStyle: TextStyle(color: Colors.blue),
                   border: OutlineInputBorder(),
                 ),
                 validator: (value) {
                   if (value != null && value.isEmpty) {
-                    return "Kullanıcı adı giriniz!";
+                    return "Telefon giriniz!";
                   } else {
                     return null;
                   }
@@ -88,7 +89,8 @@ class _RegisterPageState extends State<RegisterPage> {
                   suffixIcon: GestureDetector(
                     onTap: () {
                       setState(() {
-                        obscurePassword = !obscurePassword; // Şifre görünürlüğünü değiştir
+                        obscurePassword =
+                            !obscurePassword; // Şifre görünürlüğünü değiştir
                       });
                     },
                     child: Icon(
@@ -108,7 +110,8 @@ class _RegisterPageState extends State<RegisterPage> {
                 },
               ),
               SizedBox(
-                height: 10.0,),
+                height: 10.0,
+              ),
               _registerButton()
             ],
           ),
@@ -116,7 +119,6 @@ class _RegisterPageState extends State<RegisterPage> {
       ),
     );
   }
-
 
   Widget _registerButton() => ElevatedButton(
         onPressed: () {
