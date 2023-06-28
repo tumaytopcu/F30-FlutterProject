@@ -129,7 +129,7 @@ class _LoginPageState extends State<LoginPage> {
             usernameController.clear();
             passwordController.clear();
 
-            Navigator.push(
+            Navigator.pushReplacement(
               context,
               MaterialPageRoute(builder: (context) => HomePage()),
             );
@@ -140,7 +140,7 @@ class _LoginPageState extends State<LoginPage> {
   Widget _googleButton() => FloatingActionButton.extended(
         onPressed: () {},
         icon: Image.asset(
-          'images/google_logo.png',
+          'assets/google_logo.png',
           height: 32,
           width: 32,
         ),
@@ -150,7 +150,7 @@ class _LoginPageState extends State<LoginPage> {
       );
   Widget _withoutRegisterButton() => FloatingActionButton.extended(
         onPressed: () {
-          Navigator.push(
+          Navigator.pushReplacement(
             context,
             MaterialPageRoute(builder: (context) => HomePage()),
           );

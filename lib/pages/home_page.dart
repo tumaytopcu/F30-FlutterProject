@@ -1,3 +1,4 @@
+import 'package:f30_bootcamp/pages/ana_ekran.dart';
 import 'package:f30_bootcamp/pages/profile_page.dart';
 import 'package:flutter/material.dart';
 
@@ -132,11 +133,13 @@ class FourthPage extends StatelessWidget {
 class FifthPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Text(
-        'HomePage',
-        style: TextStyle(fontSize: 24),
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      title: 'F30',
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
       ),
+      home: AnaEkran(),
     );
   }
 }
