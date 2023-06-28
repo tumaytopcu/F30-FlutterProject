@@ -49,7 +49,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Image.asset('images/ww1.png'), // Görsel ekleniyor
+                    Image.asset('assets/ww1.png'), // Görsel ekleniyor
                   ],
                 ),
               ),

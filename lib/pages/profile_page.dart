@@ -116,6 +116,15 @@ class ProfilePage extends StatelessWidget {
                   ),
                   GestureDetector(
                     onTap: () {
+                      // Çıkış Yap tıklama işlemini burada yönetebilirsiniz
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) {
+                            return LoginPage();
+                          },
+                        ),
+                      );
                     },
                     child: ProfileMenuWidget(
                       title: "Çıkış Yap",
@@ -136,7 +145,6 @@ class ProfilePage extends StatelessWidget {
     );
   }
 }
-
 
 class ProfileMenuWidget extends StatelessWidget {
   const ProfileMenuWidget({
@@ -173,19 +181,20 @@ class ProfileMenuWidget extends StatelessWidget {
           ),
         ),
         title: Text(title),
-          // Eğer endIcon true ise Container'ı, false ise null döndür.
-        trailing: endIcon ? Container(
-          width: 30,
-          height: 30,
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(100),
-            color: Colors.black.withOpacity(0.1),
-          ),
-             child: Icon(
-            Icons.arrow_forward_ios,
-            color: Colors.black,
-          ),
-        )
+        // Eğer endIcon true ise Container'ı, false ise null döndür.
+        trailing: endIcon
+            ? Container(
+                width: 30,
+                height: 30,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(100),
+                  color: Colors.black.withOpacity(0.1),
+                ),
+                child: Icon(
+                  Icons.arrow_forward_ios,
+                  color: Colors.black,
+                ),
+              )
             : null,
       ),
     );
