@@ -1,4 +1,4 @@
-import 'dart:html';
+import 'dart:io';
 
 import 'package:flutter/material.dart';
 
@@ -6,6 +6,8 @@ class RegisterPage extends StatefulWidget {
   @override
   _RegisterPageState createState() => _RegisterPageState();
 }
+
+bool obscurePassword = true;
 
 class _RegisterPageState extends State<RegisterPage> {
   String username = "";
@@ -20,85 +22,101 @@ class _RegisterPageState extends State<RegisterPage> {
         title: Text('Register Page'),
       ),
       body: Form(
-          key: _formkey,
-          child: Padding(
-            padding: const EdgeInsets.only(left: 20.0, right: 20.0),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                TextFormField(
-                  //autovalidateMode: AutovalidateMode.always,
-                  decoration: InputDecoration(
-                    focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.black),
-                    ),
-                    labelText: "Email",
-                    labelStyle: TextStyle(color: Colors.blue),
-                    border: OutlineInputBorder(),
+        key: _formkey,
+        child: Padding(
+          padding: const EdgeInsets.only(left: 20.0, right: 20.0),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              TextFormField(
+                //autovalidateMode: AutovalidateMode.always,
+                decoration: InputDecoration(
+                  focusedBorder: OutlineInputBorder(
+                    borderSide: BorderSide(color: Colors.black),
                   ),
-                  validator: (value) {
-                    if (value != null && value.isEmpty) {
-                      return "Email giriniz!";
-                    } else {
-                      return null;
-                    }
-                  },
-                  onSaved: (value) {
-                    username = value!;
-                  },
+                  labelText: "Email",
+                  labelStyle: TextStyle(color: Colors.blue),
+                  border: OutlineInputBorder(),
                 ),
-                SizedBox(
-                  height: 10.0,
-                ),
-                TextFormField(
-                  //autovalidateMode: AutovalidateMode.always,
-                  decoration: InputDecoration(
-                    focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.black),
-                    ),
-                    labelText: "Kullanıcı Adı",
-                    labelStyle: TextStyle(color: Colors.blue),
-                    border: OutlineInputBorder(),
+                validator: (value) {
+                  if (value != null && value.isEmpty) {
+                    return "Email giriniz!";
+                  } else {
+                    return null;
+                  }
+                },
+                onSaved: (value) {
+                  email = value!;
+                },
+              ),
+              SizedBox(
+                height: 10.0,
+              ),
+              TextFormField(
+                //autovalidateMode: AutovalidateMode.always,
+                decoration: InputDecoration(
+                  focusedBorder: OutlineInputBorder(
+                    borderSide: BorderSide(color: Colors.black),
                   ),
-                  validator: (value) {
-                    if (value != null && value.isEmpty) {
-                      return "Kullanıcı adı giriniz!";
-                    } else {
-                      return null;
-                    }
-                  },
-                  onSaved: (value) {
-                    password = value!;
-                  },
+                  labelText: "Telefon",
+                  labelStyle: TextStyle(color: Colors.blue),
+                  border: OutlineInputBorder(),
                 ),
-                SizedBox(
-                  height: 10.0,
-                ),
-                TextFormField(
-                  //autovalidateMode: AutovalidateMode.always,
-                  decoration: InputDecoration(
-                    focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.black),
-                    ),
-                    labelText: "Şifre",
-                    labelStyle: TextStyle(color: Colors.blue),
-                    border: OutlineInputBorder(),
+                validator: (value) {
+                  if (value != null && value.isEmpty) {
+                    return "Telefon giriniz!";
+                  } else {
+                    return null;
+                  }
+                },
+                onSaved: (value) {
+                  username = value!;
+                },
+              ),
+              SizedBox(
+                height: 10.0,
+              ),
+              TextFormField(
+                obscureText: obscurePassword,
+                //autovalidateMode: AutovalidateMode.always,
+                decoration: InputDecoration(
+                  focusedBorder: OutlineInputBorder(
+                    borderSide: BorderSide(color: Colors.black),
                   ),
-                  validator: (value) {
-                    if (value != null && value.isEmpty) {
-                      return "Şifre giriniz!";
-                    } else {
-                      return null;
-                    }
-                  },
-                  onSaved: (value) {
-                    email = value!;
-                  },
+                  labelText: "Şifre",
+                  labelStyle: TextStyle(color: Colors.blue),
+                  border: OutlineInputBorder(),
+                  suffixIcon: GestureDetector(
+                    onTap: () {
+                      setState(() {
+                        obscurePassword =
+                            !obscurePassword; // Şifre görünürlüğünü değiştir
+                      });
+                    },
+                    child: Icon(
+                      obscurePassword ? Icons.visibility_off : Icons.visibility,
+                    ),
+                  ),
                 ),
-                _registerButton()
-              ],
-            ),
-          )),
+                validator: (value) {
+                  if (value != null && value.isEmpty) {
+                    return "Şifre giriniz!";
+                  } else {
+                    return null;
+                  }
+                },
+                onSaved: (value) {
+                  password = value!;
+                },
+              ),
+              SizedBox(
+                height: 10.0,
+              ),
+              _registerButton()
+            ],
+          ),
+        ),
+      ),
     );
   }
 
