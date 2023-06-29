@@ -1,12 +1,21 @@
 import 'package:flutter/material.dart';
-
 import 'home_page.dart';
 import 'login_page.dart';
 
-class ProfilePage extends StatelessWidget {
-  const ProfilePage({Key? key});
+class ProfilePage extends StatefulWidget {
+  const ProfilePage({super.key});
 
   @override
+  _ProfilePageState createState() => _ProfilePageState();
+
+  @override
+  Widget build(BuildContext context) {
+    // TODO: implement build
+    throw UnimplementedError();
+  }
+}
+
+class _ProfilePageState extends State<ProfilePage> {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
