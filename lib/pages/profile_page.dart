@@ -75,7 +75,7 @@ class _ProfilePageState extends State<ProfilePage> {
                     ),
                   ),
                   SizedBox(
-                    height: 25,
+                    height: 20,
                   ),
                   // Profil sayfasından gidilecek sayfalara ait butonlar ve özellikleri
                   SizedBox(
@@ -93,7 +93,7 @@ class _ProfilePageState extends State<ProfilePage> {
                     ),
                   ),
                   SizedBox(
-                    height: 10,
+                    height: 4,
                   ),
                   GestureDetector(
                     onTap: () {
@@ -107,7 +107,7 @@ class _ProfilePageState extends State<ProfilePage> {
                     ),
                   ),
                   SizedBox(
-                    height: 10,
+                    height: 4,
                   ),
                   GestureDetector(
                     onTap: () {
@@ -121,7 +121,7 @@ class _ProfilePageState extends State<ProfilePage> {
                     ),
                   ),
                   SizedBox(
-                    height: 10,
+                    height: 4,
                   ),
                   GestureDetector(
                     onTap: () {
@@ -141,9 +141,6 @@ class _ProfilePageState extends State<ProfilePage> {
                       endIcon: true,
                       onPress: () {},
                     ),
-                  ),
-                  SizedBox(
-                    height: 10,
                   ),
                 ],
               ),
