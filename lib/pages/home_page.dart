@@ -1,3 +1,5 @@
+import 'package:f30_bootcamp/pages/ana_ekran.dart';
+import 'package:f30_bootcamp/pages/profile_page.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatefulWidget {
@@ -59,7 +61,7 @@ class _HomePageState extends State<HomePage> {
                 },
               ),
               IconButton(
-                icon: Icon(Icons.settings_outlined),
+                icon: Icon(Icons.person_2_outlined),
                 onPressed: () {
                   _changePage(4);
                 },
@@ -117,11 +119,13 @@ class ThirdPage extends StatelessWidget {
 class FourthPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Text(
-        'Fourth Page',
-        style: TextStyle(fontSize: 24),
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      title: 'F30',
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
       ),
+      home: ProfilePage(),
     );
   }
 }
@@ -129,11 +133,13 @@ class FourthPage extends StatelessWidget {
 class FifthPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Text(
-        'HomePage',
-        style: TextStyle(fontSize: 24),
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      title: 'F30',
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
       ),
+      home: AnaEkran(),
     );
   }
 }

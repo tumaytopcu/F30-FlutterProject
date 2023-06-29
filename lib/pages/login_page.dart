@@ -4,6 +4,8 @@ import 'package:f30_bootcamp/pages/sifremi_unuttum.dart';
 import 'package:flutter/material.dart';
 
 class LoginPage extends StatefulWidget {
+  const LoginPage({super.key});
+
   @override
   _LoginPageState createState() => _LoginPageState();
 }
@@ -129,7 +131,7 @@ class _LoginPageState extends State<LoginPage> {
             usernameController.clear();
             passwordController.clear();
 
-            Navigator.push(
+            Navigator.pushReplacement(
               context,
               MaterialPageRoute(builder: (context) => HomePage()),
             );
@@ -140,7 +142,7 @@ class _LoginPageState extends State<LoginPage> {
   Widget _googleButton() => FloatingActionButton.extended(
         onPressed: () {},
         icon: Image.asset(
-          'images/google_logo.png',
+          'assets/google_logo.png',
           height: 32,
           width: 32,
         ),
@@ -149,7 +151,12 @@ class _LoginPageState extends State<LoginPage> {
         foregroundColor: Colors.blue,
       );
   Widget _withoutRegisterButton() => FloatingActionButton.extended(
-        onPressed: () {},
+        onPressed: () {
+          Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(builder: (context) => HomePage()),
+          );
+        },
         label: Text("Üye olmadan devam et"),
         extendedTextStyle: const TextStyle(fontSize: 10),
         backgroundColor: Colors.white,
