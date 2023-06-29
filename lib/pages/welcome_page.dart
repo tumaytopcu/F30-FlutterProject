@@ -2,8 +2,6 @@ import 'package:f30_bootcamp/pages/login_page.dart';
 import 'package:flutter/material.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
-
-
 class WelcomePage extends StatelessWidget {
   const WelcomePage({super.key});
 
@@ -75,7 +73,9 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
               children: [
                 GestureDetector(
                     onTap: () {
-                      _controller.jumpToPage(2);
+                      Navigator.of(context).push(
+                        MaterialPageRoute(builder: (context) => LoginPage()),
+                      );
                     },
                     //atla
                     child: Text('Skip')),
@@ -88,13 +88,11 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                 if (onLastPage)
                   GestureDetector(
                     onTap: () {
-
                       Navigator.of(context).push(
                         MaterialPageRoute(builder: (context) => LoginPage()),
                       );
                     },
                     child: Text('Done'),
-
                   )
                 else
                   GestureDetector(
