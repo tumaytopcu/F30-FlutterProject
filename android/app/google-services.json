@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "558295029611",
+    "project_id": "ecopazar-f30",
+    "storage_bucket": "ecopazar-f30.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:558295029611:android:0c2e045bc930ba173e9e2e",
+        "android_client_info": {
+          "package_name": "com.example.f30_bootcamp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "558295029611-o1hftccn03cc1kieddfvk7t0qkmq942g.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAU4dc3lKe4UrvkIOLUIEXuq4QSKDCG1_0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "558295029611-o1hftccn03cc1kieddfvk7t0qkmq942g.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
