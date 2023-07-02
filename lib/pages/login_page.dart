@@ -37,9 +37,9 @@ class _LoginPageState extends State<LoginPage> {
                   focusedBorder: OutlineInputBorder(
                     borderSide: BorderSide(color: Colors.black),
                   ),
-                  hintText: "+90 555 555 55 55",
+                  hintText: "+90 500 000 00 00",
                   hintStyle: TextStyle(color: Colors.grey),
-                  labelText: "Telefon",
+                  labelText: "Telefon Numarası",
                   labelStyle: TextStyle(color: Colors.blue),
                   border: OutlineInputBorder(),
                 ),
