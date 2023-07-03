@@ -42,7 +42,7 @@
 
 
 ## Sprint 1
-
+Toplam tamamlanacak puanlar: 420
 Tahmini olarak Sprint içinde tamamlanacak puan: 195 Puan
  - Puan tamamlama mantığı: İlk sprintte 40 puan tamamlanması öngörülmüş, 20 puan tamamlanmıştır. Done olarak işaretlediğimiz iki issue burada gözükmediğinden onları da toplam puana dahil ettik. 
  - <img width="625" alt="image" src="https://github.com/tumaytopcu/F30-FlutterProject/assets/34829265/e4176918-6b83-4a41-8bcd-837bda00f842">
@@ -67,4 +67,28 @@ Tahmini olarak Sprint içinde tamamlanacak puan: 195 Puan
  - Takım içindeki iş dağılımıyla ilgili yeniden düzenleme yapma kararı alınmıştır,
  - Takım üyelerinin gelecek sprintlerde daha aktif olmaları gerektiği üzerinde durulmuştur,
  - Takım üyelerinin finallerin bitişiyle birlikte gelecek sprintlerde daha aktif olmaları gerektiği konusunda anlaşılmıştır.
+
+## Sprint 2
+Toplam tamamlanacak puanlar: 420
+Tahmini olarak Sprint içinde tamamlanacak puan: 390 Puan
+ - Puan tamamlama mantığı: İkinci sprintte 390 puan tamamlanması öngörülmüş, 240 puan tamamlanmıştır. Aşağıda sprintteki iş listemizi görebilirsiniz.
+ - ![screencapture-tmytpc-atlassian-net-jira-software-projects-FFP-boards-1-backlog-2023-07-03-08_00_31](https://github.com/tumaytopcu/F30-FlutterProject/assets/34829265/0ac16621-797d-4f13-9c11-d30e62a51743)
+ - Daily Scrum: https://docs.google.com/document/d/14t0k-wBChS1xkkr88MQrGSAHqFUcen8ALDubOBwjI14/edit?usp=sharing 
+ - Sprint Board Güncellemesi: ![screencapture-tmytpc-atlassian-net-jira-software-projects-FFP-boards-1-2023-07-03-07_56_26](https://github.com/tumaytopcu/F30-FlutterProject/assets/34829265/b54c33ab-29e3-4611-bf56-e134770959d6)
+ - Ürün Durumu: Ürün içerisinde Onboarding, Login, Register, Şifremi Unuttum, Homepage ve oradan yönlendirmeyi düşündüğümüz diğer sayfalar ve son olarak profil page hazırlanmıştır. 
+
+
+#### Sprint Notu
+- UX olarak temelde uygulamanın nasıl işlemesi gerektiği konusunu netleştirdik. UI hazırlıklarına devam etmekteyiz. Uygulamada kullanılacak temel sayfalar netleştirildi ve kodlandı. Firebase kurulumu yapıldı, authentication da önümüzdeki sprintte bağlanacak.  
+
+#### Sprint Review
+ ##### Alınan kararlar: 
+ - Backlogumuzu geliştirme, oluşturulan sayfaların içeriklerini doldurma, arayüz geliştirme alanlarına yoğunlaşma.  
+ ##### Sprint Review katılımcıları: 
+ - Tümay Topçu, Recep Arslan, Züleyha Akbaş, Ramazan Aydınlı
+
+#### Sprint Retrospective
+ - Bayram dolayısıyla çok odaklanamadığımız projemize daha sıkı çalışmamız gerektiğine karar verilmiştir.
+ - Online toplantılarımızı sıklaştırma kararı alınmıştır.
+ - Github kullanımımızı geliştirmek üzerine karar alınmıştır. 
 
