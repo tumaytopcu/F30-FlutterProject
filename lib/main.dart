@@ -1,6 +1,7 @@
 import 'package:f30_bootcamp/pages/login_page.dart';
 import 'package:f30_bootcamp/pages/welcome_page.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 
@@ -18,6 +19,9 @@ class MyApp extends StatelessWidget {
       title: 'F30',
       theme: ThemeData(
         primarySwatch: Colors.blue,
+        textTheme: GoogleFonts.openSansTextTheme().apply(
+          bodyColor: Colors.white, // Metin rengini beyaz yapar
+        ),
       ),
       home: FutureBuilder<bool>(
          future: isFirstTime(),
