@@ -75,7 +75,11 @@ Tahmini olarak Sprint içinde tamamlanacak puan: 390 Puan
  - ![screencapture-tmytpc-atlassian-net-jira-software-projects-FFP-boards-1-backlog-2023-07-03-08_00_31](https://github.com/tumaytopcu/F30-FlutterProject/assets/34829265/0ac16621-797d-4f13-9c11-d30e62a51743)
  - Daily Scrum: https://docs.google.com/document/d/14t0k-wBChS1xkkr88MQrGSAHqFUcen8ALDubOBwjI14/edit?usp=sharing 
  - Sprint Board Güncellemesi: ![screencapture-tmytpc-atlassian-net-jira-software-projects-FFP-boards-1-2023-07-03-07_56_26](https://github.com/tumaytopcu/F30-FlutterProject/assets/34829265/b54c33ab-29e3-4611-bf56-e134770959d6)
- - Ürün Durumu: Ürün içerisinde Onboarding, Login, Register, Şifremi Unuttum, Homepage ve oradan yönlendirmeyi düşündüğümüz diğer sayfalar ve son olarak profil page hazırlanmıştır. 
+ - Ürün Durumu: Ürün içerisinde Onboarding, Login, Register, Şifremi Unuttum, Homepage ve oradan yönlendirmeyi düşündüğümüz diğer sayfalar ve son olarak profil page hazırlanmıştır.
+ - ![Screenshot_20230703_081513](https://github.com/tumaytopcu/F30-FlutterProject/assets/34829265/feba5835-b351-4b86-8b93-d321718ac3dd)
+![Screenshot_20230703_081555](https://github.com/tumaytopcu/F30-FlutterProject/assets/34829265/e0d1967a-7255-4dfd-8fc3-edf1f6ba4f6d)
+![Screenshot_20230703_081834](https://github.com/tumaytopcu/F30-FlutterProject/assets/34829265/19b16912-5534-4dc6-95c1-5d3b05eacf83)
+
 
 
 #### Sprint Notu
