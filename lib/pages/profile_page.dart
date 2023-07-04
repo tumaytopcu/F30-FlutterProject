@@ -75,76 +75,78 @@ class _ProfilePageState extends State<ProfilePage> {
                     ),
                   ),
                   SizedBox(
-                    height: 25,
+                    height: 10,
                   ),
                   // Profil sayfasından gidilecek sayfalara ait butonlar ve özellikleri
-                  SizedBox(
-                    height: 5,
-                  ),
-                  GestureDetector(
-                    onTap: () {
-                      // Ayarlar tıklama işlemini burada yönetebilirsiniz
-                    },
-                    child: ProfileMenuWidget(
-                      title: "Ayarlar",
-                      icon: Icons.settings_rounded,
-                      endIcon: true,
-                      onPress: () {},
+
+                  Expanded(
+                    child: ListView(children: [   GestureDetector(
+                      onTap: () {
+                        // Ayarlar tıklama işlemini burada yönetebilirsiniz
+                      },
+                      child: ProfileMenuWidget(
+                        title: "Ayarlar",
+                        icon: Icons.settings_rounded,
+                        endIcon: true,
+                        onPress: () {},
+                      ),
                     ),
-                  ),
-                  SizedBox(
-                    height: 10,
-                  ),
-                  GestureDetector(
-                    onTap: () {
-                      // Arkadaşlarını Davet Et tıklama işlemini burada yönetebilirsiniz
-                    },
-                    child: ProfileMenuWidget(
-                      title: "Arkadaşlarını Davet Et",
-                      icon: Icons.group_add,
-                      endIcon: true,
-                      onPress: () {},
-                    ),
-                  ),
-                  SizedBox(
-                    height: 10,
-                  ),
-                  GestureDetector(
-                    onTap: () {
-                      // Yardım ve Destek tıklama işlemini burada yönetebilirsiniz
-                    },
-                    child: ProfileMenuWidget(
-                      title: "Yardım ve Destek",
-                      icon: Icons.support_agent,
-                      endIcon: true,
-                      onPress: () {},
-                    ),
-                  ),
-                  SizedBox(
-                    height: 10,
-                  ),
-                  GestureDetector(
-                    onTap: () {
-                      // Çıkış Yap tıklama işlemini burada yönetebilirsiniz
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) {
-                            return LoginPage();
-                          },
+                      SizedBox(
+                        height: 10,
+                      ),
+                      GestureDetector(
+                        onTap: () {
+                          // Arkadaşlarını Davet Et tıklama işlemini burada yönetebilirsiniz
+                        },
+                        child: ProfileMenuWidget(
+                          title: "Arkadaşlarını Davet Et",
+                          icon: Icons.group_add,
+                          endIcon: true,
+                          onPress: () {},
                         ),
-                      );
-                    },
-                    child: ProfileMenuWidget(
-                      title: "Çıkış Yap",
-                      icon: Icons.logout,
-                      endIcon: true,
-                      onPress: () {},
-                    ),
-                  ),
-                  SizedBox(
-                    height: 10,
-                  ),
+                      ),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      GestureDetector(
+                        onTap: () {
+                          // Yardım ve Destek tıklama işlemini burada yönetebilirsiniz
+                        },
+                        child: ProfileMenuWidget(
+                          title: "Yardım ve Destek",
+                          icon: Icons.support_agent,
+                          endIcon: true,
+                          onPress: () {},
+                        ),
+                      ),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      GestureDetector(
+                        onTap: () {
+                          // Çıkış Yap tıklama işlemini burada yönetebilirsiniz
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) {
+                                return LoginPage();
+                              },
+                            ),
+                          );
+                        },
+                        child: ProfileMenuWidget(
+                          title: "Çıkış Yap",
+                          icon: Icons.logout,
+                          endIcon: true,
+                          onPress: () {},
+                        ),
+                      ),
+                      SizedBox(
+                        height: 10,
+                      ), ],),
+                  )
+
+
                 ],
               ),
             ),
