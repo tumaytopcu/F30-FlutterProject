@@ -1,47 +1,21 @@
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'home_page.dart';
 import 'login_page.dart';
 
 class ProfilePage extends StatefulWidget {
-  const ProfilePage({Key? key}) : super(key: key);
+  const ProfilePage({super.key});
 
   @override
   _ProfilePageState createState() => _ProfilePageState();
+
+  @override
+  Widget build(BuildContext context) {
+    // TODO: implement build
+    throw UnimplementedError();
+  }
 }
 
 class _ProfilePageState extends State<ProfilePage> {
-  void showExitDialog() {
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          title: Text("Çıkış Yap"),
-          content: Text("Çıkış yapmak istediğinize emin misiniz?"),
-          actions: [
-            TextButton(
-              child: Text("Evet"),
-              onPressed: () {
-                // Çıkış yapılacak işlemler
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => LoginPage()),
-                );
-              },
-            ),
-            TextButton(
-              child: Text("Hayır"),
-              onPressed: () {
-                Navigator.of(context).pop(); // Alert dialogu kapat
-              },
-            ),
-          ],
-        );
-      },
-    );
-  }
-
-  @override
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
@@ -58,7 +32,7 @@ class _ProfilePageState extends State<ProfilePage> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  InkWell(
+                  GestureDetector(
                     onTap: () {
                       // Avatar tıklama işlemini burada yönetebilirsiniz
                     },
@@ -101,68 +75,78 @@ class _ProfilePageState extends State<ProfilePage> {
                     ),
                   ),
                   SizedBox(
-                    height: 20,
+                    height: 10,
                   ),
                   // Profil sayfasından gidilecek sayfalara ait butonlar ve özellikleri
-                  SizedBox(
-                    height: 5,
-                  ),
-                  InkWell(
-                    onTap: () {
-                      // Ayarlar tıklama işlemini burada yönetebilirsiniz
-                    },
-                    child: ProfileMenuWidget(
-                      title: "Ayarlar",
-                      icon: Icons.settings_rounded,
-                      endIcon: true,
+
+                  Expanded(
+                    child: ListView(children: [   GestureDetector(
                       onTap: () {
                         // Ayarlar tıklama işlemini burada yönetebilirsiniz
                       },
+                      child: ProfileMenuWidget(
+                        title: "Ayarlar",
+                        icon: Icons.settings_rounded,
+                        endIcon: true,
+                        onPress: () {},
+                      ),
                     ),
-                  ),
-                  SizedBox(
-                    height: 4,
-                  ),
-                  InkWell(
-                    onTap: () {
-                      // Arkadaşlarını Davet Et tıklama işlemini burada yönetebilirsiniz
-                    },
-                    child: ProfileMenuWidget(
-                      title: "Arkadaşını Davet Et",
-                      icon: Icons.group_add,
-                      endIcon: true,
-                      onTap: () {},
-                    ),
-                  ),
-                  SizedBox(
-                    height: 4,
-                  ),
-                  InkWell(
-                    onTap: () {
-                      // Yardım ve Destek tıklama işlemini burada yönetebilirsiniz
-                    },
-                    child: ProfileMenuWidget(
-                      title: "Yardım ve Destek",
-                      icon: Icons.support_agent,
-                      endIcon: true,
-                      onTap: () {},
-                    ),
-                  ),
-                  SizedBox(
-                    height: 4,
-                  ),
-                  InkWell(
-                    onTap: () {
-                      // Çıkış Yap tıklama işlemini burada yönetebilirsiniz
-                      showExitDialog();
-                    },
-                    child: ProfileMenuWidget(
-                      title: "Çıkış Yap",
-                      icon: Icons.logout,
-                      endIcon: true,
-                      onTap: () {},
-                    ),
-                  ),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      GestureDetector(
+                        onTap: () {
+                          // Arkadaşlarını Davet Et tıklama işlemini burada yönetebilirsiniz
+                        },
+                        child: ProfileMenuWidget(
+                          title: "Arkadaşlarını Davet Et",
+                          icon: Icons.group_add,
+                          endIcon: true,
+                          onPress: () {},
+                        ),
+                      ),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      GestureDetector(
+                        onTap: () {
+                          // Yardım ve Destek tıklama işlemini burada yönetebilirsiniz
+                        },
+                        child: ProfileMenuWidget(
+                          title: "Yardım ve Destek",
+                          icon: Icons.support_agent,
+                          endIcon: true,
+                          onPress: () {},
+                        ),
+                      ),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      GestureDetector(
+                        onTap: () {
+                          // Çıkış Yap tıklama işlemini burada yönetebilirsiniz
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) {
+                                return LoginPage();
+                              },
+                            ),
+                          );
+                        },
+                        child: ProfileMenuWidget(
+                          title: "Çıkış Yap",
+                          icon: Icons.logout,
+                          endIcon: true,
+                          onPress: () {},
+                        ),
+                      ),
+                      SizedBox(
+                        height: 10,
+                      ), ],),
+                  )
+
+
                 ],
               ),
             ),
@@ -178,14 +162,14 @@ class ProfileMenuWidget extends StatelessWidget {
     Key? key,
     required this.title,
     required this.icon,
-    required this.onTap,
+    required this.onPress,
     this.endIcon = true,
     this.textColor,
   }) : super(key: key);
 
   final String title;
   final IconData icon;
-  final VoidCallback onTap;
+  final VoidCallback onPress;
   final bool endIcon;
   final Color? textColor;
 
@@ -194,7 +178,7 @@ class ProfileMenuWidget extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: ListTile(
-        onTap: onTap,
+        onTap: onPress,
         leading: Container(
           width: 60,
           height: 60,
@@ -208,6 +192,7 @@ class ProfileMenuWidget extends StatelessWidget {
           ),
         ),
         title: Text(title),
+        // Eğer endIcon true ise Container'ı, false ise null döndür.
         trailing: endIcon
             ? Container(
                 width: 30,
