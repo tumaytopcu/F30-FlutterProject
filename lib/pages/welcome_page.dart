@@ -1,8 +1,7 @@
 import 'package:f30_bootcamp/pages/login_page.dart';
 import 'package:flutter/material.dart';
+import 'package:lottie/lottie.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
-
-
 
 class WelcomePage extends StatelessWidget {
   const WelcomePage({super.key});
@@ -44,12 +43,48 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
           },
           children: [
             Container(
-              color: Colors.grey.shade400,
+              color: Colors.blue[300],
               child: Center(
                 child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  SizedBox(height: 100,),
+                  Lottie.network('https://assets8.lottiefiles.com/packages/lf20_swnrn2oy.json'), // Görsel ekleniyor
+                  SizedBox(height: 40,),
+                  Center(
+                    child: Text('EcoPazar sayesinde, insanlar yolculukları sırasında yerel meyve ve sebze satıcılarını kolaylıkla bulabilir ve doğrudan üreticiden alışveriş yapabilirler.',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                      color: Colors.white, // Metin rengini beyaz yapar
+                      fontWeight: FontWeight.bold, // Metini kalın (bold) yapar
+                      fontSize: 24,
+
+                    ),
+                    ),
+                  ),
+                ],
+              ),
+              ),
+            ),
+            Container(
+              color: Colors.blue[300],
+              child: Center(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    Image.asset('assets/ww1.png'), // Görsel ekleniyor
+                    Lottie.network('https://assets6.lottiefiles.com/packages/lf20_klurhj0n.json'), // Görsel ekleniyor
+                    SizedBox(height: 20,),
+                    Center(
+                      child: Text('Yerel tarım üreticilerinin ve onların yol kenarları veya kendi bahçelerinde satış yapmalarını sağlar.',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          color: Colors.white, // Metin rengini beyaz yapar
+                          fontWeight: FontWeight.bold, // Metini kalın (bold) yapar
+                          fontSize: 24,
+
+                        ),
+                      ),
+                    ),
                   ],
                 ),
               ),
@@ -57,13 +92,24 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
             Container(
               color: Colors.blue[300],
               child: Center(
-                child: Text('ikinci sayfa'),
-              ),
-            ),
-            Container(
-              color: Colors.yellowAccent[400],
-              child: Center(
-                child: Text('üçüncü sayfa'),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    SizedBox(height: 50,),
+                    Lottie.network('https://assets7.lottiefiles.com/packages/lf20_q5evpnci.json'), // Görsel ekleniyor
+                    SizedBox(height: 20,),
+                    Center(
+                      child: Text(' Uygulama, tarım aktivitesini teşvik etmeyi amaçlar ve hem ücretli hem de ücretsiz satış imkanı sağlar. EcoPazar App, yerel ekonomiye ve sürdürülebilir tarıma katkı sağlama fikrini savunur ve tüketicilerin doğrudan üreticilerden alışveriş yapmasını teşvik eder.',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          color: Colors.white, // Metin rengini beyaz yapar
+                          fontWeight: FontWeight.bold, // Metini kalın (bold) yapar
+                          fontSize: 20,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ),
           ],
@@ -88,13 +134,12 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                 if (onLastPage)
                   GestureDetector(
                     onTap: () {
-
-                      Navigator.of(context).push(
+                      Navigator.pushReplacement(
+                        context,
                         MaterialPageRoute(builder: (context) => LoginPage()),
                       );
                     },
                     child: Text('Done'),
-
                   )
                 else
                   GestureDetector(
