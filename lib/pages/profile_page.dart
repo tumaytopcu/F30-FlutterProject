@@ -1,86 +1,123 @@
+import 'package:f30_bootcamp/pages/profilpage_utils.dart';
 import 'package:flutter/material.dart';
 import 'home_page.dart';
 import 'login_page.dart';
 
-class ProfilePage extends StatefulWidget {
-  const ProfilePage({super.key});
+import 'dart:typed_data';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:image_picker/image_picker.dart';
+import 'profilpage_add_data.dart';
 
-  @override
-  _ProfilePageState createState() => _ProfilePageState();
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
+  runApp(const MyApp());
+}
 
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
+  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
-    throw UnimplementedError();
+    return MaterialApp(
+      home: const MyHomePage(title: ' '),
+    );
   }
 }
 
-class _ProfilePageState extends State<ProfilePage> {
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: Scaffold(
-        body: SafeArea(
-          child: ConstrainedBox(
-            constraints: BoxConstraints(
-              minHeight: MediaQuery.of(context).size.height -
-                  MediaQuery.of(context).padding.top,
-            ),
-            child: Container(
-              alignment: Alignment.center,
-              color: Colors.white,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  GestureDetector(
-                    onTap: () {
-                      // Avatar tıklama işlemini burada yönetebilirsiniz
-                    },
-                    child: Stack(
-                      alignment: Alignment.bottomRight,
-                      children: [
-                        // Resim eklenecek kısım
-                        CircleAvatar(
-                          radius: 70,
-                        ),
-                        SizedBox(
-                          height: 20,
-                        ),
-                        // Resim ekleme butonu
-                        CircleAvatar(
-                          radius: 20,
-                          backgroundColor: Colors.black,
-                          child: InkWell(
-                            onTap: () {
-                              // Ekleme simgesi tıklama işlemini burada yönetebilirsiniz
-                            },
-                            child: Icon(
-                              Icons.add,
-                              color: Colors.white,
-                              size: 20,
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  // Kullanıcı bilgileri
-                  Padding(
-                    padding: EdgeInsets.all(30.0),
-                    child: Text(
-                      "Ad Soyad",
-                      style: TextStyle(
-                        fontSize: 20,
-                      ),
-                    ),
-                  ),
-                  SizedBox(
-                    height: 10,
-                  ),
-                  // Profil sayfasından gidilecek sayfalara ait butonlar ve özellikleri
+class MyHomePage extends StatefulWidget {
+  const MyHomePage({super.key, required this.title});
 
-                  Expanded(
-                    child: ListView(children: [   GestureDetector(
+  final String title;
+
+  @override
+  State<MyHomePage> createState() => _MyHomePageState();
+}
+
+class _MyHomePageState extends State<MyHomePage> {
+  Uint8List? _image;
+  final TextEditingController nameController = TextEditingController();
+  final TextEditingController bioController = TextEditingController();
+
+  void selectImage() async {
+    Uint8List img = await pickImage((ImageSource.gallery));
+    setState(() {
+      _image = img;
+    });
+  }
+
+  void saveProfile() async {
+    String name = nameController.text;
+    String bio = bioController.text;
+
+    String resp =
+        await StoreData().saveData(name: name, bio: bio, file: _image!);
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(widget.title),
+      ),
+      body: Center(
+        child: Container(
+          padding: const EdgeInsets.symmetric(
+            horizontal: 32,
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              const SizedBox(
+                height: 24,
+              ),
+              Stack(
+                children: [
+                  _image != null
+                      ? CircleAvatar(
+                          radius: 64,
+                          backgroundImage: MemoryImage(_image!),
+                        )
+                      : const CircleAvatar(
+                          radius: 64,
+                          backgroundImage: NetworkImage(
+                              'https://png.pngitem.com/pimgs/s/421-4212266_transparent-default-avatar-png-default-avatar-images-png.png'),
+                        ),
+                  Positioned(
+                    bottom: -10,
+                    left: 80,
+                    child: IconButton(
+                      onPressed: selectImage,
+                      icon: const Icon(Icons.add_a_photo),
+                    ),
+                  )
+                ],
+              ),
+              Padding(
+                padding: EdgeInsets.all(10.0),
+                child: Text(
+                  "Ad Soyad",
+                  style: TextStyle(
+                    fontSize: 20,
+                  ),
+                ),
+              ),
+              ElevatedButton(
+                onPressed: saveProfile,
+                child: const Text('Save Profile'),
+              ),
+
+              SizedBox(
+                height: 20,
+              ),
+
+              // Profil sayfasından gidilecek sayfalara ait butonlar ve özellikleri
+
+              Expanded(
+                child: ListView(
+                  children: [
+                    GestureDetector(
                       onTap: () {
                         // Ayarlar tıklama işlemini burada yönetebilirsiniz
                       },
@@ -91,65 +128,63 @@ class _ProfilePageState extends State<ProfilePage> {
                         onPress: () {},
                       ),
                     ),
-                      SizedBox(
-                        height: 10,
+                    SizedBox(
+                      height: 10,
+                    ),
+                    GestureDetector(
+                      onTap: () {
+                        // Arkadaşlarını Davet Et tıklama işlemini burada yönetebilirsiniz
+                      },
+                      child: ProfileMenuWidget(
+                        title: "Arkadaşlarını Davet Et",
+                        icon: Icons.group_add,
+                        endIcon: true,
+                        onPress: () {},
                       ),
-                      GestureDetector(
-                        onTap: () {
-                          // Arkadaşlarını Davet Et tıklama işlemini burada yönetebilirsiniz
-                        },
-                        child: ProfileMenuWidget(
-                          title: "Arkadaşlarını Davet Et",
-                          icon: Icons.group_add,
-                          endIcon: true,
-                          onPress: () {},
-                        ),
+                    ),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    GestureDetector(
+                      onTap: () {
+                        // Yardım ve Destek tıklama işlemini burada yönetebilirsiniz
+                      },
+                      child: ProfileMenuWidget(
+                        title: "Yardım ve Destek",
+                        icon: Icons.support_agent,
+                        endIcon: true,
+                        onPress: () {},
                       ),
-                      SizedBox(
-                        height: 10,
+                    ),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    GestureDetector(
+                      onTap: () {
+                        // Çıkış Yap tıklama işlemini burada yönetebilirsiniz
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) {
+                              return LoginPage();
+                            },
+                          ),
+                        );
+                      },
+                      child: ProfileMenuWidget(
+                        title: "Çıkış Yap",
+                        icon: Icons.logout,
+                        endIcon: true,
+                        onPress: () {},
                       ),
-                      GestureDetector(
-                        onTap: () {
-                          // Yardım ve Destek tıklama işlemini burada yönetebilirsiniz
-                        },
-                        child: ProfileMenuWidget(
-                          title: "Yardım ve Destek",
-                          icon: Icons.support_agent,
-                          endIcon: true,
-                          onPress: () {},
-                        ),
-                      ),
-                      SizedBox(
-                        height: 10,
-                      ),
-                      GestureDetector(
-                        onTap: () {
-                          // Çıkış Yap tıklama işlemini burada yönetebilirsiniz
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) {
-                                return LoginPage();
-                              },
-                            ),
-                          );
-                        },
-                        child: ProfileMenuWidget(
-                          title: "Çıkış Yap",
-                          icon: Icons.logout,
-                          endIcon: true,
-                          onPress: () {},
-                        ),
-                      ),
-                      SizedBox(
-                        height: 10,
-                      ), ],),
-                  )
-
-
-                ],
-              ),
-            ),
+                    ),
+                    SizedBox(
+                      height: 10,
+                    ),
+                  ],
+                ),
+              )
+            ],
           ),
         ),
       ),
