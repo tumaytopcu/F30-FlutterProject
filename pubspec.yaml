@@ -31,7 +31,7 @@ dependencies:
   flutter:
     sdk: flutter
   shared_preferences: ^2.0.8
-  google_fonts: ^2.0.0
+  google_fonts: ^5.1.0
 
 
 
@@ -40,6 +40,10 @@ dependencies:
   cupertino_icons: ^1.0.2
   smooth_page_indicator: ^1.0.0
   lottie: ^1.2.1
+  image_picker: ^1.0.0
+  firebase_core: ^2.14.0
+  cloud_firestore: ^4.8.2
+  firebase_storage: ^11.2.4
 
 dev_dependencies:
   flutter_test:
