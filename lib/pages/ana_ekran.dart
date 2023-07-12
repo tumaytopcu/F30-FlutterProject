@@ -109,7 +109,7 @@ class CardWidget extends StatelessWidget {
                         children: [
                           Icon(Icons.location_on),
                           SizedBox(width: 4),
-                          Text(subtitle),
+                          Text(subtitle + ' m'),
                         ],
                       ),
                     ],
