@@ -2,6 +2,8 @@ import 'package:f30_bootcamp/pages/ana_ekran.dart';
 import 'package:f30_bootcamp/pages/profile_page.dart';
 import 'package:flutter/material.dart';
 
+import 'anaekran_içeriği/anaekran_listview.dart';
+
 class HomePage extends StatefulWidget {
   @override
   _HomePageState createState() => _HomePageState();
