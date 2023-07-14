@@ -5,6 +5,8 @@ import 'package:f30_bootcamp/pages/search_page.dart';
 import 'package:f30_bootcamp/pages/wallet_page.dart';
 import 'package:flutter/material.dart';
 
+import 'anaekran_içeriği/anaekran_listview.dart';
+
 class HomePage extends StatefulWidget {
   @override
   _HomePageState createState() => _HomePageState();
