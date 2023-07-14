@@ -1,10 +1,11 @@
+import 'package:flutter/material.dart';
 import 'package:f30_bootcamp/pages/home_page.dart';
 import 'package:f30_bootcamp/pages/register_page.dart';
 import 'package:f30_bootcamp/pages/sifremi_unuttum.dart';
-import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class LoginPage extends StatefulWidget {
-  const LoginPage({super.key});
+  const LoginPage({Key? key}) : super(key: key);
 
   @override
   _LoginPageState createState() => _LoginPageState();
@@ -16,14 +17,26 @@ class _LoginPageState extends State<LoginPage> {
   TextEditingController usernameController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
+  final _auth = FirebaseAuth.instance;
+
+  @override
+  void initState() {
+    super.initState();
+    // Check if there is a current user
+    final currentUser = _auth.currentUser;
+    if (currentUser != null) {
+      // Navigate to the main page
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (context) => HomePage()),
+      );
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      appBar: AppBar(
-        title: Center(child: Text('Login Page')),
-      ),
       body: Form(
         key: _formKey,
         child: Padding(
@@ -31,15 +44,36 @@ class _LoginPageState extends State<LoginPage> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
+              Stack(
+                alignment: Alignment.center,
+                children: [
+                  Container(
+                    width: double.infinity,
+                    height: 200,
+                    color: Colors.blue,
+                  ),
+                  Positioned(
+                    top: 20, // Yüksekliği ayarlayın
+                    left: 20, // Sol kenardan uzaklığı ayarlayın
+                    child: Image.asset(
+                      'assets/eco_pazar.png',
+                      fit: BoxFit.cover,
+                      width: 150, // Genişliği ayarlayın
+                      height: 150, // Yüksekliği ayarlayın
+                    ),
+                  ),
+                ],
+              ),
               TextFormField(
+                style: TextStyle(color: Colors.blue),
                 controller: usernameController,
                 decoration: InputDecoration(
                   focusedBorder: OutlineInputBorder(
                     borderSide: BorderSide(color: Colors.black),
                   ),
-                  hintText: "+90 555 555 55 55",
+                  hintText: "ecopazar@gmail.com",
                   hintStyle: TextStyle(color: Colors.grey),
-                  labelText: "Telefon",
+                  labelText: "E-mail",
                   labelStyle: TextStyle(color: Colors.blue),
                   border: OutlineInputBorder(),
                 ),
@@ -55,6 +89,7 @@ class _LoginPageState extends State<LoginPage> {
                 height: 10.0,
               ),
               TextFormField(
+                style: TextStyle(color: Colors.blue),
                 controller: passwordController,
                 obscureText: obscurePassword,
                 decoration: InputDecoration(
@@ -120,46 +155,74 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 
-  Widget _loginButton() => ElevatedButton(
-        onPressed: () {
-          if (_formKey.currentState!.validate()) {
-            String username = usernameController.text;
-            String password = passwordController.text;
-            // Burada giriş işlemlerini yapabilirsiniz
-
-            // Giriş işleminden sonra kullanıcı adı ve şifre alanlarını temizle
-            usernameController.clear();
-            passwordController.clear();
-
-            Navigator.pushReplacement(
-              context,
-              MaterialPageRoute(builder: (context) => HomePage()),
+  Widget _loginButton() {
+    return ElevatedButton(
+      onPressed: () async {
+        if (_formKey.currentState!.validate()) {
+          try {
+            final userCredential = await _auth.signInWithEmailAndPassword(
+              email: usernameController.text.trim(),
+              password: passwordController.text.trim(),
             );
+            if (userCredential.user != null) {
+              // Login successful
+              Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(builder: (context) => HomePage()),
+              );
+            }
+          } on FirebaseAuthException catch (e) {
+            if (e.code == 'user-not-found') {
+              // User not found
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(
+                  content: Text("Kullanıcı bulunamadı."),
+                ),
+              );
+            } else if (e.code == 'wrong-password') {
+              // Wrong password
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(
+                  content: Text("Yanlış şifre."),
+                ),
+              );
+            }
           }
-        },
-        child: Text("Giriş Yap"),
-      );
-  Widget _googleButton() => FloatingActionButton.extended(
-        onPressed: () {},
-        icon: Image.asset(
-          'assets/google_logo.png',
-          height: 32,
-          width: 32,
-        ),
-        label: Text("Google ile Giriş Yap"),
-        backgroundColor: Colors.white,
-        foregroundColor: Colors.blue,
-      );
-  Widget _withoutRegisterButton() => FloatingActionButton.extended(
-        onPressed: () {
-          Navigator.pushReplacement(
-            context,
-            MaterialPageRoute(builder: (context) => HomePage()),
-          );
-        },
-        label: Text("Üye olmadan devam et"),
-        extendedTextStyle: const TextStyle(fontSize: 10),
-        backgroundColor: Colors.white,
-        foregroundColor: Colors.blue,
-      );
+          // Clear the username and password fields
+          usernameController.clear();
+          passwordController.clear();
+        }
+      },
+      child: Text("Giriş Yap"),
+    );
+  }
+
+  Widget _googleButton() {
+    return FloatingActionButton.extended(
+      onPressed: () {},
+      icon: Image.asset(
+        'assets/google_logo.png',
+        height: 32,
+        width: 32,
+      ),
+      label: Text("Google ile Giriş Yap"),
+      backgroundColor: Colors.white,
+      foregroundColor: Colors.blue,
+    );
+  }
+
+  Widget _withoutRegisterButton() {
+    return FloatingActionButton.extended(
+      onPressed: () {
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (context) => HomePage()),
+        );
+      },
+      label: Text("Üye olmadan devam et"),
+      extendedTextStyle: const TextStyle(fontSize: 10),
+      backgroundColor: Colors.white,
+      foregroundColor: Colors.blue,
+    );
+  }
 }

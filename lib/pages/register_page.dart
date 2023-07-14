@@ -1,6 +1,8 @@
-import 'dart:io';
-
+import 'package:f30_bootcamp/pages/login_page.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+
+final _auth = FirebaseAuth.instance;
 
 class RegisterPage extends StatefulWidget {
   @override
@@ -14,6 +16,7 @@ class _RegisterPageState extends State<RegisterPage> {
   String password = "";
   String email = "";
   final _formkey = GlobalKey<FormState>();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -29,6 +32,7 @@ class _RegisterPageState extends State<RegisterPage> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               TextFormField(
+                style: TextStyle(color: Colors.blue),
                 //autovalidateMode: AutovalidateMode.always,
                 decoration: InputDecoration(
                   focusedBorder: OutlineInputBorder(
@@ -53,6 +57,7 @@ class _RegisterPageState extends State<RegisterPage> {
                 height: 10.0,
               ),
               TextFormField(
+                style: TextStyle(color: Colors.blue),
                 //autovalidateMode: AutovalidateMode.always,
                 decoration: InputDecoration(
                   focusedBorder: OutlineInputBorder(
@@ -77,6 +82,7 @@ class _RegisterPageState extends State<RegisterPage> {
                 height: 10.0,
               ),
               TextFormField(
+                style: TextStyle(color: Colors.blue),
                 obscureText: obscurePassword,
                 //autovalidateMode: AutovalidateMode.always,
                 decoration: InputDecoration(
@@ -120,10 +126,30 @@ class _RegisterPageState extends State<RegisterPage> {
     );
   }
 
+  Future<void> signUpWithEmailAndPassword(String email, String password) async {
+    try {
+      UserCredential userCredential = await _auth
+          .createUserWithEmailAndPassword(email: email, password: password);
+      // User registered successfully
+      await _auth.signOut();
+      Navigator.of(context).pushReplacement(
+        MaterialPageRoute(builder: (context) => LoginPage()),
+      );
+    } on FirebaseAuthException catch (e) {
+      var snackBar = SnackBar(content: Text(e.code));
+      // Step 3
+      ScaffoldMessenger.of(context).showSnackBar(snackBar);
+    } catch (e) {
+      // Other errors
+    }
+  }
+
   Widget _registerButton() => ElevatedButton(
         onPressed: () {
           if (_formkey.currentState!.validate()) {
             _formkey.currentState!.save();
+            signUpWithEmailAndPassword(
+                email, password); // call the function here
           }
         },
         child: Text("Kayıt Ol"),
