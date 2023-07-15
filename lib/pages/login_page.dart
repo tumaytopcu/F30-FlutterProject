@@ -3,12 +3,47 @@ import 'package:f30_bootcamp/pages/home_page.dart';
 import 'package:f30_bootcamp/pages/register_page.dart';
 import 'package:f30_bootcamp/pages/sifremi_unuttum.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
 
   @override
   _LoginPageState createState() => _LoginPageState();
+}
+
+const List<String> scopes = <String>[
+  'email',
+  'https://www.googleapis.com/auth/contacts.readonly',
+];
+
+GoogleSignIn _googleSignIn = GoogleSignIn(
+  // Optional clientId
+  clientId:
+      '558295029611-4h59dqvucjgon6ovnrnppqen3hien86j.apps.googleusercontent.com',
+  // clientId: 'your-client_id.apps.googleusercontent.com',
+  scopes: scopes,
+);
+
+Future<void> _handleSignIn(BuildContext context) async {
+  try {
+    var _currentUser = await _googleSignIn.isSignedIn();
+    print('CurrentUser: $_currentUser');
+    if (_currentUser) {
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (context) => HomePage()),
+      );
+    }
+    var res = await _googleSignIn.signIn();
+    Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(builder: (context) => HomePage()),
+    );
+    print('google auth dan gelen data, $res');
+  } catch (error) {
+    print('errorr: $error');
+  }
 }
 
 bool obscurePassword = true;
@@ -18,6 +53,13 @@ class _LoginPageState extends State<LoginPage> {
   TextEditingController passwordController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
   final _auth = FirebaseAuth.instance;
+
+  @override
+  void dispose() {
+    usernameController.dispose();
+    passwordController.dispose();
+    super.dispose();
+  }
 
   @override
   void initState() {
@@ -121,11 +163,16 @@ class _LoginPageState extends State<LoginPage> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
-                  MaterialButton(
-                    child: Text("Üye Ol"),
-                    onPressed: () {
-                      Navigator.of(context).push(
-                        MaterialPageRoute(builder: (context) => RegisterPage()),
+                  Builder(
+                    builder: (BuildContext context) {
+                      return MaterialButton(
+                        child: Text("Üye Ol"),
+                        onPressed: () {
+                          Navigator.of(context).push(
+                            MaterialPageRoute(
+                                builder: (context) => RegisterPage()),
+                          );
+                        },
                       );
                     },
                   ),
@@ -199,7 +246,9 @@ class _LoginPageState extends State<LoginPage> {
 
   Widget _googleButton() {
     return FloatingActionButton.extended(
-      onPressed: () {},
+      onPressed: () => {
+        _handleSignIn(context),
+      },
       icon: Image.asset(
         'assets/google_logo.png',
         height: 32,
