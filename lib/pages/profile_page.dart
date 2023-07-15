@@ -1,4 +1,5 @@
 import 'package:f30_bootcamp/pages/login_page.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'dart:typed_data';
 import 'package:f30_bootcamp/pages/profilpage_utils.dart';
@@ -6,7 +7,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:f30_bootcamp/pages/profilpage_add_data.dart';
 
-
+final _auth = FirebaseAuth.instance;
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
@@ -23,21 +24,17 @@ class MyApp extends StatelessWidget {
 }
 
 class ProfilePage extends StatefulWidget {
-  const ProfilePage({Key? key})  : super(key: key);
+  const ProfilePage({Key? key}) : super(key: key);
 
   @override
   _ProfilePageState createState() => _ProfilePageState();
 
-  @override
   Widget build(BuildContext context) {
     return ProfilePage();
   }
-
 }
 
 class _ProfilePageState extends State<ProfilePage> {
-
-
   Uint8List? _image;
   final TextEditingController nameController = TextEditingController();
   final TextEditingController bioController = TextEditingController();
@@ -47,23 +44,16 @@ class _ProfilePageState extends State<ProfilePage> {
     setState(() {
       _image = img;
     });
-
   }
 
   void saveProfile() async {
     String name = nameController.text;
     String bio = bioController.text;
 
-    String resp =
     await StoreData().saveData(name: name, bio: bio, file: _image!);
   }
 
   @override
-
-
-
-
-
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
@@ -82,14 +72,14 @@ class _ProfilePageState extends State<ProfilePage> {
                   children: [
                     _image != null
                         ? CircleAvatar(
-                      radius: 64,
-                      backgroundImage: MemoryImage(_image!),
-                    )
+                            radius: 64,
+                            backgroundImage: MemoryImage(_image!),
+                          )
                         : const CircleAvatar(
-                      radius: 64,
-                      backgroundImage: NetworkImage(
-                          'https://png.pngitem.com/pimgs/s/421-4212266_transparent-default-avatar-png-default-avatar-images-png.png'),
-                    ),
+                            radius: 64,
+                            backgroundImage: NetworkImage(
+                                'https://png.pngitem.com/pimgs/s/421-4212266_transparent-default-avatar-png-default-avatar-images-png.png'),
+                          ),
                     Positioned(
                       bottom: -10,
                       left: 80,
@@ -181,7 +171,15 @@ class _ProfilePageState extends State<ProfilePage> {
                           title: "Çıkış Yap",
                           icon: Icons.logout,
                           endIcon: true,
-                          onPress: () {},
+                          onPress: () async {
+                            if (_auth.currentUser != null) {
+                              await _auth.signOut();
+                              Navigator.of(context).pushReplacement(
+                                MaterialPageRoute(
+                                    builder: (context) => LoginPage()),
+                              );
+                            }
+                          },
                         ),
                       ),
                       SizedBox(
@@ -198,8 +196,6 @@ class _ProfilePageState extends State<ProfilePage> {
     );
   }
 }
-
-
 
 class ProfileMenuWidget extends StatelessWidget {
   const ProfileMenuWidget({
@@ -239,17 +235,17 @@ class ProfileMenuWidget extends StatelessWidget {
         // Eğer endIcon true ise Container'ı, false ise null döndür.
         trailing: endIcon
             ? Container(
-          width: 30,
-          height: 30,
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(100),
-            color: Colors.black.withOpacity(0.1),
-          ),
-          child: Icon(
-            Icons.arrow_forward_ios,
-            color: Colors.black,
-          ),
-        )
+                width: 30,
+                height: 30,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(100),
+                  color: Colors.black.withOpacity(0.1),
+                ),
+                child: Icon(
+                  Icons.arrow_forward_ios,
+                  color: Colors.black,
+                ),
+              )
             : null,
       ),
     );
