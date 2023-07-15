@@ -38,6 +38,10 @@ class _addButonuState extends State<addButonu> {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
+        appBar: AppBar(
+          title: Text('Your Store'),
+          backgroundColor: Colors.green,
+        ),
         body: SafeArea(
           child: Container(
             alignment: Alignment.center,
@@ -78,10 +82,11 @@ class _addButonuState extends State<addButonu> {
                         children: [
                           TextFormField(
                             decoration: InputDecoration(
+                              labelText: 'Ürünün Adı',
                               icon: Icon(
                                 Icons.border_color_outlined,
                                 size: 40.0,
-                                color: Colors.red,
+                                color: Colors.black,
                               ),
                             ),
                           ),
@@ -90,10 +95,11 @@ class _addButonuState extends State<addButonu> {
                           ),
                           TextFormField(
                             decoration: InputDecoration(
+                              labelText: 'Ürünün Fiyatı',
                               icon: Icon(
                                 Icons.attach_money_outlined,
                                 size: 40.0,
-                                color: Colors.red,
+                                color: Colors.black,
                               ),
                             ),
                           ),
@@ -102,10 +108,11 @@ class _addButonuState extends State<addButonu> {
                           ),
                           TextFormField(
                             decoration: InputDecoration(
+                              labelText: 'Satıcı Bilgileri',
                               icon: Icon(
                                 Icons.face,
                                 size: 40.0,
-                                color: Colors.red,
+                                color: Colors.black,
                               ),
                             ),
                           ),
@@ -114,10 +121,11 @@ class _addButonuState extends State<addButonu> {
                           ),
                           TextFormField(
                             decoration: InputDecoration(
+                              labelText: 'Konum',
                               icon: Icon(
                                 Icons.add_location,
                                 size: 40.0,
-                                color: Colors.red,
+                                color: Colors.black,
                               ),
                             ),
                           ),
@@ -127,16 +135,18 @@ class _addButonuState extends State<addButonu> {
 
                           //buton
 
+
                           ElevatedButton(
                             onPressed: () {},
                             child: Text(
                               'Onayla',
                               style: TextStyle(
                                 color: Colors.black,
+                                fontSize: 30,
                               ),
                             ),
                             style: ElevatedButton.styleFrom(
-                                backgroundColor: Colors.red),
+                                backgroundColor: Colors.green),
                           ),
                         ],
                       ),
