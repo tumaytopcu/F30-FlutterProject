@@ -1,7 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:f30_bootcamp/pages/anaekran_içeriği/anaekran_listview.dart';
+
+void main() async{
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
+
+  runApp(const MaterialApp(
+    home:AnaEkran(),
+  ));
+}
 
 
-class AnaEkran extends StatelessWidget {
+
+
+//eskiden yapılan asset bölümü
+/*class AnaEkran extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -58,9 +72,9 @@ class AnaEkran extends StatelessWidget {
       ),
     );
   }
-}
+}*/
 
-class CardWidget extends StatelessWidget {
+/*class CardWidget extends StatelessWidget {
   final String image;
   final String title;
   final String subtitle;
@@ -123,4 +137,4 @@ class CardWidget extends StatelessWidget {
       ),
     );
   }
-}
+}*/
