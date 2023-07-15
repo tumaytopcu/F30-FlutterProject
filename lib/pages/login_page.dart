@@ -78,6 +78,7 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Color(0xE8E8E8E8E8),
       resizeToAvoidBottomInset: false,
       body: Form(
         key: _formKey,
@@ -92,7 +93,6 @@ class _LoginPageState extends State<LoginPage> {
                   Container(
                     width: double.infinity,
                     height: 200,
-                    color: Colors.blue,
                   ),
                   Positioned(
                     top: 20, // Yüksekliği ayarlayın
@@ -100,28 +100,37 @@ class _LoginPageState extends State<LoginPage> {
                     child: Image.asset(
                       'assets/eco_pazar.png',
                       fit: BoxFit.cover,
-                      width: 150, // Genişliği ayarlayın
-                      height: 150, // Yüksekliği ayarlayın
+                      width: 300, // Genişliği ayarlayın
+                      height: 71, // Yüksekliği ayarlayın
                     ),
                   ),
                 ],
               ),
               TextFormField(
-                style: TextStyle(color: Colors.blue),
+                style: TextStyle(color: Color.fromARGB(255, 19, 221, 123)),
                 controller: usernameController,
                 decoration: InputDecoration(
                   focusedBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: Colors.black),
+                    borderSide:
+                        BorderSide(color: Color.fromARGB(255, 19, 221, 123)),
+                    borderRadius: BorderRadius.circular(50.0),
                   ),
+                  enabledBorder: OutlineInputBorder(
+                    borderSide: BorderSide(color: Colors.green),
+                    borderRadius: BorderRadius.circular(50.0),
+                  ),
+                  fillColor: Colors.white,
+                  filled: true,
                   hintText: "ecopazar@gmail.com",
                   hintStyle: TextStyle(color: Colors.grey),
                   labelText: "E-mail",
-                  labelStyle: TextStyle(color: Colors.blue),
+                  labelStyle:
+                      TextStyle(color: Color.fromARGB(255, 19, 221, 123)),
                   border: OutlineInputBorder(),
                 ),
                 validator: (value) {
                   if (value != null && value.isEmpty) {
-                    return "Telefon numarası giriniz!";
+                    return "Email giriniz!";
                   } else {
                     return null;
                   }
@@ -131,15 +140,24 @@ class _LoginPageState extends State<LoginPage> {
                 height: 10.0,
               ),
               TextFormField(
-                style: TextStyle(color: Colors.blue),
+                style: TextStyle(color: Color.fromARGB(255, 19, 221, 123)),
                 controller: passwordController,
                 obscureText: obscurePassword,
                 decoration: InputDecoration(
                   focusedBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: Colors.blue),
+                    borderSide:
+                        BorderSide(color: Color.fromARGB(255, 19, 221, 123)),
+                    borderRadius: BorderRadius.circular(50.0),
                   ),
+                  enabledBorder: OutlineInputBorder(
+                    borderSide: BorderSide(color: Colors.green),
+                    borderRadius: BorderRadius.circular(50.0),
+                  ), // Kenar yuvarlaklığı ayarlanıyor
+                  fillColor: Colors.white,
+                  filled: true,
                   labelText: "Şifre",
-                  labelStyle: TextStyle(color: Colors.blue),
+                  labelStyle:
+                      TextStyle(color: Color.fromARGB(255, 19, 221, 123)),
                   border: OutlineInputBorder(),
                   suffixIcon: GestureDetector(
                     onTap: () {
@@ -149,6 +167,7 @@ class _LoginPageState extends State<LoginPage> {
                     },
                     child: Icon(
                       obscurePassword ? Icons.visibility_off : Icons.visibility,
+                      color: Color.fromARGB(255, 19, 221, 123),
                     ),
                   ),
                 ),
@@ -192,7 +211,7 @@ class _LoginPageState extends State<LoginPage> {
               ),
               _googleButton(),
               SizedBox(
-                height: 50.0,
+                height: 20.0,
               ),
               _withoutRegisterButton(),
             ],
@@ -203,75 +222,111 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   Widget _loginButton() {
-    return ElevatedButton(
-      onPressed: () async {
-        if (_formKey.currentState!.validate()) {
-          try {
-            final userCredential = await _auth.signInWithEmailAndPassword(
-              email: usernameController.text.trim(),
-              password: passwordController.text.trim(),
-            );
-            if (userCredential.user != null) {
-              // Login successful
-              Navigator.pushReplacement(
-                context,
-                MaterialPageRoute(builder: (context) => HomePage()),
+    return Container(
+      height: MediaQuery.of(context).size.height * 0.06,
+      width: MediaQuery.of(context).size.width * 0.9,
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(20.0),
+      ),
+      child: ElevatedButton(
+        onPressed: () async {
+          if (_formKey.currentState!.validate()) {
+            try {
+              final userCredential = await _auth.signInWithEmailAndPassword(
+                email: usernameController.text.trim(),
+                password: passwordController.text.trim(),
               );
+              if (userCredential.user != null) {
+                // Login successful
+                Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(builder: (context) => HomePage()),
+                );
+              }
+            } on FirebaseAuthException catch (e) {
+              if (e.code == 'user-not-found') {
+                // User not found
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(
+                    content: Text("Kullanıcı bulunamadı."),
+                  ),
+                );
+              } else if (e.code == 'wrong-password') {
+                // Wrong password
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(
+                    content: Text("Yanlış şifre."),
+                  ),
+                );
+              }
             }
-          } on FirebaseAuthException catch (e) {
-            if (e.code == 'user-not-found') {
-              // User not found
-              ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(
-                  content: Text("Kullanıcı bulunamadı."),
-                ),
-              );
-            } else if (e.code == 'wrong-password') {
-              // Wrong password
-              ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(
-                  content: Text("Yanlış şifre."),
-                ),
-              );
-            }
+            // Clear the username and password fields
+            usernameController.clear();
+            passwordController.clear();
           }
-          // Clear the username and password fields
-          usernameController.clear();
-          passwordController.clear();
-        }
-      },
-      child: Text("Giriş Yap"),
+        },
+        style: ButtonStyle(
+          backgroundColor: MaterialStateProperty.all<Color>(
+              Color.fromARGB(255, 19, 221, 123)),
+          shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+            RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(20.0),
+            ),
+          ),
+        ),
+        child: Text("Giriş Yap"),
+      ),
     );
   }
 
   Widget _googleButton() {
-    return FloatingActionButton.extended(
-      onPressed: () => {
-        _handleSignIn(context),
-      },
-      icon: Image.asset(
-        'assets/google_logo.png',
-        height: 32,
-        width: 32,
+    return Container(
+      height: MediaQuery.of(context).size.height * 0.06,
+      width: MediaQuery.of(context).size.width * 0.9,
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(20.0),
       ),
-      label: Text("Google ile Giriş Yap"),
-      backgroundColor: Colors.white,
-      foregroundColor: Colors.blue,
+      child: FloatingActionButton.extended(
+        onPressed: () => {
+          _handleSignIn(context),
+        },
+        icon: Image.asset(
+          'assets/google_logo.png',
+          height: 32,
+          width: 32,
+        ),
+        label: Text("Google ile Giriş Yap"),
+        backgroundColor: Colors.white,
+        foregroundColor: Colors.black,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(20.0),
+        ),
+      ),
     );
   }
 
   Widget _withoutRegisterButton() {
-    return FloatingActionButton.extended(
-      onPressed: () {
-        Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(builder: (context) => HomePage()),
-        );
-      },
-      label: Text("Üye olmadan devam et"),
-      extendedTextStyle: const TextStyle(fontSize: 10),
-      backgroundColor: Colors.white,
-      foregroundColor: Colors.blue,
+    return Container(
+      height: MediaQuery.of(context).size.height * 0.06,
+      width: MediaQuery.of(context).size.width * 0.9,
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(20.0),
+      ),
+      child: FloatingActionButton.extended(
+        onPressed: () {
+          Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(builder: (context) => HomePage()),
+          );
+        },
+        label: Text("Üye olmadan devam et"),
+        extendedTextStyle: const TextStyle(fontSize: 10),
+        backgroundColor: Color(0xE8E8E8E8E8),
+        foregroundColor: Colors.black,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(20.0),
+        ),
+      ),
     );
   }
 }
