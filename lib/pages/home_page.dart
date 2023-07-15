@@ -1,5 +1,8 @@
+import 'package:f30_bootcamp/pages/add_page.dart';
 import 'package:f30_bootcamp/pages/ana_ekran.dart';
 import 'package:f30_bootcamp/pages/profile_page.dart';
+import 'package:f30_bootcamp/pages/search_page.dart';
+import 'package:f30_bootcamp/pages/wallet_page.dart';
 import 'package:flutter/material.dart';
 
 import 'anaekran_içeriği/anaekran_listview.dart';
@@ -10,31 +13,31 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  int _currentIndex = 5;
+  int _currentIndex = 0;
 
   final List<Widget> _pages = [
-    FirstPage(),
-    SecondPage(),
-    SizedBox.shrink(), // Boş bir widget
-    ThirdPage(),
-    FourthPage(),
-    FifthPage(),
+    WalletPage(),
+    AddPage(),
+    SearchPage(),
+    ProfilePage(),
+    AnaEkran(),
+  ];
+
+  final List<String> _titles = [
+    'Wallet',
+    'Add',
+    'Search',
+    'Profile',
+    'Home',
   ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Home'),
+        title: Text(_titles[_currentIndex]),
       ),
       body: _pages[_currentIndex],
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          _changePage(5);
-        },
-        child: Icon(Icons.home),
-      ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       bottomNavigationBar: BottomAppBar(
         shape: CircularNotchedRectangle(),
         notchMargin: 8.0,
@@ -45,103 +48,57 @@ class _HomePageState extends State<HomePage> {
             children: [
               IconButton(
                 icon: Icon(Icons.euro_symbol_outlined),
+                color: Colors.blueAccent,
                 onPressed: () {
-                  _changePage(0);
+                  setState(() {
+                    _currentIndex = 0;
+                  });
                 },
               ),
               IconButton(
                 icon: Icon(Icons.add_location_outlined),
+                color: Colors.blueAccent,
                 onPressed: () {
-                  _changePage(1);
+                  setState(() {
+                    _currentIndex = 1;
+                  });
                 },
               ),
-              SizedBox(), // Boş bir widget
+              SizedBox(width: 40.0), // Boş bir widget
               IconButton(
                 icon: Icon(Icons.search),
+                color: Colors.blueAccent,
                 onPressed: () {
-                  _changePage(3);
+                  setState(() {
+                    _currentIndex = 2;
+                  });
                 },
               ),
               IconButton(
                 icon: Icon(Icons.person_2_outlined),
+                color: Colors.blueAccent,
                 onPressed: () {
-                  _changePage(4);
+                  setState(() {
+                    _currentIndex = 3;
+                  });
                 },
               ),
             ],
           ),
         ),
       ),
-    );
-  }
-
-  void _changePage(int index) {
-    setState(() {
-      _currentIndex = index;
-    });
-  }
-}
-
-class FirstPage extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Center(
-      child: Text(
-        'First Page',
-        style: TextStyle(fontSize: 24),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          setState(() {
+            _currentIndex = 4;
+          });
+        },
+        child: Icon(Icons.home),
+        backgroundColor: Colors.blue,
+        foregroundColor: Colors.white,
+        elevation: 2.0,
       ),
-    );
-  }
-}
-
-class SecondPage extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Center(
-      child: Text(
-        'Second Page',
-        style: TextStyle(fontSize: 24),
-      ),
-    );
-  }
-}
-
-class ThirdPage extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Center(
-      child: Text(
-        'Third Page',
-        style: TextStyle(fontSize: 24),
-      ),
-    );
-  }
-}
-
-class FourthPage extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'F30',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: ProfilePage(),
-    );
-  }
-}
-
-class FifthPage extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'F30',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: AnaEkran(),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
     );
   }
 }
