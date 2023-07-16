@@ -1,4 +1,5 @@
 import 'package:f30_bootcamp/pages/login_page.dart';
+import 'package:f30_bootcamp/pages/yardim_destek.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'dart:typed_data';
@@ -152,13 +153,21 @@ class _ProfilePageState extends State<ProfilePage> {
                       ),
                       GestureDetector(
                         onTap: () {
-                          // Yardım ve Destek tıklama işlemini burada yönetebilirsiniz
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => YardimPage()),
+                          );// Yardım ve Destek tıklama işlemini burada yönetebilirsiniz
                         },
                         child: ProfileMenuWidget(
                           title: "Yardım ve Destek",
                           icon: Icons.support_agent,
                           endIcon: true,
-                          onPress: () {},
+                          onPress: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(builder: (context) => YardimPage()),
+                            );
+                          },
                         ),
                       ),
                       SizedBox(
