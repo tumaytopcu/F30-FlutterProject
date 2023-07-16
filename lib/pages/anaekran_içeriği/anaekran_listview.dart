@@ -1,8 +1,14 @@
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-
+import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter/material.dart';
 import 'addButonu.dart';
+
+
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
+  runApp(AnaEkran());
+}
 
 class AnaEkran extends StatefulWidget {
   const AnaEkran({Key? key});
@@ -12,10 +18,9 @@ class AnaEkran extends StatefulWidget {
 }
 
 class _AnaEkranState extends State<AnaEkran> {
-  final _userStream =
-      FirebaseFirestore.instance.collection('users_data').snapshots();
+  final _userStream = FirebaseFirestore.instance.collection('users_data').snapshots();
 
-  void _showBottomSheet(BuildContext context, String urun, int fiyat, String satici, String konum) {
+  void _showBottomSheet(BuildContext context, String urun, String fiyat, String satici, String konum, String? imageURL) {
     showModalBottomSheet(
       context: context,
       builder: (BuildContext context) {
@@ -25,13 +30,27 @@ class _AnaEkranState extends State<AnaEkran> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
+                CircleAvatar(
+                  radius: 64,
+                  backgroundImage: imageURL != null ?
+                  NetworkImage(imageURL) :
+                  AssetImage('assets/default_photo.jpg') as ImageProvider,
+                ),
                 Text(
                   urun,
                   style: TextStyle(fontSize: 24),
                 ),
                 SizedBox(height: 16),
                 Text(
-                  '$fiyat TL',
+                  'Fiyat: $fiyat',
+                  style: TextStyle(fontSize: 18),
+                ),
+                Text(
+                  'Satıcı: $satici',
+                  style: TextStyle(fontSize: 18),
+                ),
+                Text(
+                  'Konum: $konum',
                   style: TextStyle(fontSize: 18),
                 ),
               ],
@@ -45,49 +64,46 @@ class _AnaEkranState extends State<AnaEkran> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Ana Ekran (kart sayfası)'),
-      ),
-      body: StreamBuilder(
+
+      body: StreamBuilder<QuerySnapshot>(
         stream: _userStream,
         builder: (context, snapshot) {
           if (snapshot.hasError) {
-            return const Text('connection error');
+            return Text('Bir hata oluştu: ${snapshot.error}');
           }
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return const Text('loading');
+            return Center(child: CircularProgressIndicator());
           }
           var docs = snapshot.data!.docs;
           return ListView.builder(
             itemCount: docs.length,
             itemBuilder: (context, index) {
+              String urun = docs[index]['urun'];
+              String fiyat = docs[index]['fiyat'];
+              String satici = docs[index]['satici'];
+              String konum = docs[index]['konum'];
+              String? imageURL = docs[index]['imageURL'];
               return InkWell(
                 onTap: () {
-                  String urun = docs[index]['urun'];
-                  int fiyat = docs[index]['fiyati'];
-                  String satici= docs[index]['satici'];
-                  String konum = docs[index]['konum'];
-                  _showBottomSheet(context, urun, fiyat, satici ,konum);
+                  _showBottomSheet(context, urun, fiyat, satici, konum, imageURL);
                 },
-                child: Container(
-                  child: Column(
-                    children: [
-                      Card(
-                        color: Colors.white38,
-                        child: ListTile(
-                          leading: const Icon(Icons.person),
-                          title: Text(docs[index]['urun'] ,),
-                          subtitle: Column(
-                            crossAxisAlignment: CrossAxisAlignment.end,
-                            children: [
-                              Text('Fiyatı: ${docs[index]['fiyati']} TL' ),
-                              Text('Satıcı Bilgileri : ${docs[index]['satici']}',),
-                              Text('Konumu: ${docs[index]['konum']}' ,),
-                            ],
-                          ),
-                        ),
-                      ),
-                    ],
+                child: Card(
+                  color: Colors.white38,
+                  child: ListTile(
+                    leading: CircleAvatar(
+                      backgroundImage: imageURL != null ?
+                      NetworkImage(imageURL) :
+                      AssetImage('assets/default_photo.jpg') as ImageProvider,
+                    ),
+                    title: Text(urun),
+                    subtitle: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text('Fiyatı: $fiyat TL'),
+                        Text('Satıcı Bilgileri: $satici'),
+                        Text('Konumu: $konum'),
+                      ],
+                    ),
                   ),
                 ),
               );
@@ -99,7 +115,7 @@ class _AnaEkranState extends State<AnaEkran> {
         onPressed: () {
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => addButonu()),
+            MaterialPageRoute(builder: (context) => AddButonu()),
           );
         },
         child: Icon(Icons.add),
@@ -107,3 +123,27 @@ class _AnaEkranState extends State<AnaEkran> {
     );
   }
 }
+
+final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+
+class FirebaseService {
+  final CollectionReference usersCol =
+  FirebaseFirestore.instance.collection("users_data");
+
+  Future<void> insertData({
+    required String urun,
+    required String fiyat,
+    required String satici,
+    required String konum,
+    String? imageURL,
+  }) {
+    return usersCol.add({
+      'urun': urun,
+      'fiyat': fiyat,
+      'satici': satici,
+      'konum': konum,
+      'imageURL': imageURL,
+    });
+  }
+}
+

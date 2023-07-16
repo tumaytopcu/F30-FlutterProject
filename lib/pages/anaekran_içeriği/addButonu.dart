@@ -1,36 +1,43 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
-import 'dart:typed_data';
 import 'package:image_picker/image_picker.dart';
+import 'dart:typed_data';
+import 'anaekran_listview.dart';
 
-//YourStore Sayfası
+// YourStore Sayfası
 
-class addButonu extends StatefulWidget {
-  const addButonu({super.key});
+class AddButonu extends StatefulWidget {
+  AddButonu({Key? key});
 
   @override
-  State<addButonu> createState() => _addButonuState();
+  State<AddButonu> createState() => _AddButonuState();
 }
 
-class _addButonuState extends State<addButonu> {
+class _AddButonuState extends State<AddButonu> {
   Uint8List? profile;
-  final TextEditingController nameController = TextEditingController();
-  final TextEditingController bioController = TextEditingController();
+  final TextEditingController _urunController = TextEditingController();
+  final TextEditingController _fiyatController = TextEditingController();
+  final TextEditingController _saticiController = TextEditingController();
+  final TextEditingController _konumController = TextEditingController();
+  final FirebaseStorage _storage = FirebaseStorage.instance;
 
   void selectImage() async {
-    Uint8List img = await pickImage((ImageSource.gallery));
-    setState(() {
-      profile = img;
-    });
+    Uint8List? img = await pickImage(ImageSource.gallery);
+    if (img != null) {
+      setState(() {
+        profile = img;
+      });
+    }
   }
 
-  void saveProfile() async {
-    String name = nameController.text;
-    String bio = bioController.text;
-
-    String resp =
-        await StoreData().saveData(name: name, bio: bio, file: profile!);
+  @override
+  void dispose() {
+    _urunController.dispose();
+    _fiyatController.dispose();
+    _saticiController.dispose();
+    _konumController.dispose();
+    super.dispose();
   }
 
   @override
@@ -39,7 +46,7 @@ class _addButonuState extends State<addButonu> {
       debugShowCheckedModeBanner: false,
       home: Scaffold(
         appBar: AppBar(
-          title: Text('Your Store'),
+          title: const Text('Your Store'),
           backgroundColor: Colors.green,
         ),
         body: SafeArea(
@@ -55,16 +62,17 @@ class _addButonuState extends State<addButonu> {
                     children: [
                       Stack(
                         children: [
-                          profile != null
-                              ? CircleAvatar(
-                                  radius: 64,
-                                  backgroundImage: MemoryImage(profile!),
-                                )
-                              : const CircleAvatar(
-                                  radius: 64,
-                                  backgroundImage:
-                                      AssetImage('assets/add_photo.jpg'),
-                                ),
+                          if (profile != null)
+                            CircleAvatar(
+                              radius: 64,
+                              backgroundImage: MemoryImage(profile!),
+                            )
+                          else
+                            const CircleAvatar(
+                              radius: 64,
+                              backgroundImage:
+                              AssetImage('assets/add_photo.jpg'),
+                            ),
                           Positioned(
                             bottom: -10,
                             left: 80,
@@ -72,16 +80,17 @@ class _addButonuState extends State<addButonu> {
                               onPressed: selectImage,
                               icon: const Icon(Icons.add_a_photo),
                             ),
-                          )
+                          ),
                         ],
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 45,
                       ),
                       Column(
                         children: [
                           TextFormField(
-                            decoration: InputDecoration(
+                            controller: _urunController,
+                            decoration: const InputDecoration(
                               labelText: 'Ürünün Adı',
                               icon: Icon(
                                 Icons.border_color_outlined,
@@ -90,11 +99,13 @@ class _addButonuState extends State<addButonu> {
                               ),
                             ),
                           ),
-                          SizedBox(
+                          const SizedBox(
                             height: 20,
                           ),
                           TextFormField(
-                            decoration: InputDecoration(
+                            controller: _fiyatController,
+                            keyboardType: TextInputType.number,
+                            decoration: const InputDecoration(
                               labelText: 'Ürünün Fiyatı',
                               icon: Icon(
                                 Icons.attach_money_outlined,
@@ -103,11 +114,12 @@ class _addButonuState extends State<addButonu> {
                               ),
                             ),
                           ),
-                          SizedBox(
+                          const SizedBox(
                             height: 20,
                           ),
                           TextFormField(
-                            decoration: InputDecoration(
+                            controller: _saticiController,
+                            decoration: const InputDecoration(
                               labelText: 'Satıcı Bilgileri',
                               icon: Icon(
                                 Icons.face,
@@ -116,11 +128,12 @@ class _addButonuState extends State<addButonu> {
                               ),
                             ),
                           ),
-                          SizedBox(
+                          const SizedBox(
                             height: 20,
                           ),
                           TextFormField(
-                            decoration: InputDecoration(
+                            controller: _konumController,
+                            decoration: const InputDecoration(
                               labelText: 'Konum',
                               icon: Icon(
                                 Icons.add_location,
@@ -129,16 +142,37 @@ class _addButonuState extends State<addButonu> {
                               ),
                             ),
                           ),
-                          SizedBox(
+                          const SizedBox(
                             height: 50,
                           ),
-
-                          //buton
-
-
                           ElevatedButton(
-                            onPressed: () {},
-                            child: Text(
+                            onPressed: () async {
+                              String urun = _urunController.text;
+                              String fiyat = _fiyatController.text;
+                              String satici = _saticiController.text;
+                              String konum = _konumController.text;
+
+                              // Fotoğrafı yükle
+                              String? imageURL;
+                              if (profile != null) {
+                                imageURL = await uploadImage(profile!);
+                              }
+
+                              await FirebaseService().insertData(
+                                urun: urun,
+                                fiyat: fiyat,
+                                satici: satici,
+                                konum: konum,
+                                imageURL: imageURL,
+                              );
+
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => AnaEkran()),
+                              );
+                            },
+                            child: const Text(
                               'Onayla',
                               style: TextStyle(
                                 color: Colors.black,
@@ -146,7 +180,23 @@ class _addButonuState extends State<addButonu> {
                               ),
                             ),
                             style: ElevatedButton.styleFrom(
-                                backgroundColor: Colors.green),
+                              backgroundColor: Colors.green,
+                            ),
+                          ),
+                          ElevatedButton(
+                            onPressed: () {
+                              Navigator.pop(context);
+                            },
+                            child: Text(
+                              'Vazgeç',
+                              style: TextStyle(
+                                color: Colors.black,
+                                fontSize: 28,
+                              ),
+                            ),
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: Colors.red[600],
+                            ),
                           ),
                         ],
                       ),
@@ -160,50 +210,45 @@ class _addButonuState extends State<addButonu> {
       ),
     );
   }
-}
 
-final FirebaseStorage _storage = FirebaseStorage.instance;
-final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+  Future<Uint8List?> pickImage(ImageSource source) async {
+    final ImagePicker _imagePicker = ImagePicker();
+    XFile? _file = await _imagePicker.pickImage(source: source);
+    if (_file != null) {
+      return await _file.readAsBytes();
+    }
+    return null;
+  }
 
-class StoreData {
-  Future<String> uploadProfileToStorage(
-      String childName, Uint8List file) async {
-    Reference ref = _storage.ref().child(childName).child('id');
-    UploadTask uploadTask = ref.putData(file);
+  Future<String?> uploadImage(Uint8List imageBytes) async {
+    String fileName = DateTime.now().millisecondsSinceEpoch.toString();
+    Reference ref = _storage.ref().child('images/$fileName');
+    UploadTask uploadTask = ref.putData(imageBytes);
     TaskSnapshot snapshot = await uploadTask;
-    String downloadURL = await snapshot.ref.getDownloadURL();
+    String? downloadURL = await snapshot.ref.getDownloadURL();
     return downloadURL;
   }
-
-  Future<String> saveData({
-    required String name,
-    required String bio,
-    required Uint8List file,
-  }) async {
-    String resp = "Some Error Occurred";
-    try {
-      if (name.isNotEmpty || bio.isNotEmpty) {
-        String imageUrl = await uploadProfileToStorage('ProfileImage', file);
-        await _firestore.collection('userProfile').add({
-          'name': name,
-          'bio': bio,
-          'imageLink': imageUrl,
-        });
-
-        resp = 'success';
-      }
-    } catch (err) {
-      resp = err.toString();
-    }
-    return resp;
-  }
 }
 
-pickImage(ImageSource source) async {
-  final ImagePicker _imagePicker = ImagePicker();
-  XFile? _file = await _imagePicker.pickImage(source: source);
-  if (_file != null) {
-    return await _file.readAsBytes();
+final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+
+class FirebaseService {
+  final CollectionReference usersCol =
+  FirebaseFirestore.instance.collection("users_data");
+
+  Future<void> insertData({
+    required String urun,
+    required String fiyat,
+    required String satici,
+    required String konum,
+    String? imageURL,
+  }) {
+    return usersCol.add({
+      'urun': urun,
+      'fiyat': fiyat,
+      'satici': satici,
+      'konum': konum,
+      'imageURL': imageURL,
+    });
   }
-  print('No Images Selected');
 }
