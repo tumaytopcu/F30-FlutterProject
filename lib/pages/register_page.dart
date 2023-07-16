@@ -1,6 +1,6 @@
+import 'package:flutter/material.dart';
 import 'package:f30_bootcamp/pages/login_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/material.dart';
 
 final _auth = FirebaseAuth.instance;
 
@@ -10,6 +10,7 @@ class RegisterPage extends StatefulWidget {
 }
 
 bool obscurePassword = true;
+bool isLoading = false;
 
 class _RegisterPageState extends State<RegisterPage> {
   String username = "";
@@ -33,7 +34,6 @@ class _RegisterPageState extends State<RegisterPage> {
             children: <Widget>[
               TextFormField(
                 style: TextStyle(color: Colors.blue),
-                //autovalidateMode: AutovalidateMode.always,
                 decoration: InputDecoration(
                   focusedBorder: OutlineInputBorder(
                     borderSide: BorderSide(color: Colors.black),
@@ -58,7 +58,6 @@ class _RegisterPageState extends State<RegisterPage> {
               ),
               TextFormField(
                 style: TextStyle(color: Colors.blue),
-                //autovalidateMode: AutovalidateMode.always,
                 decoration: InputDecoration(
                   focusedBorder: OutlineInputBorder(
                     borderSide: BorderSide(color: Colors.black),
@@ -84,7 +83,6 @@ class _RegisterPageState extends State<RegisterPage> {
               TextFormField(
                 style: TextStyle(color: Colors.blue),
                 obscureText: obscurePassword,
-                //autovalidateMode: AutovalidateMode.always,
                 decoration: InputDecoration(
                   focusedBorder: OutlineInputBorder(
                     borderSide: BorderSide(color: Colors.black),
@@ -118,7 +116,9 @@ class _RegisterPageState extends State<RegisterPage> {
               SizedBox(
                 height: 10.0,
               ),
-              _registerButton()
+              isLoading
+                  ? CircularProgressIndicator() // Yüklenme göstergesi
+                  : _registerButton(),
             ],
           ),
         ),
@@ -127,29 +127,38 @@ class _RegisterPageState extends State<RegisterPage> {
   }
 
   Future<void> signUpWithEmailAndPassword(String email, String password) async {
+    setState(() {
+      isLoading = true; // Yüklenme durumunu başlat
+    });
+
     try {
-      UserCredential userCredential = await _auth
-          .createUserWithEmailAndPassword(email: email, password: password);
-      // User registered successfully
+      UserCredential userCredential =
+          await _auth.createUserWithEmailAndPassword(
+        email: email,
+        password: password,
+      );
+      // Kayıt başarılı
       await _auth.signOut();
       Navigator.of(context).pushReplacement(
         MaterialPageRoute(builder: (context) => LoginPage()),
       );
     } on FirebaseAuthException catch (e) {
       var snackBar = SnackBar(content: Text(e.code));
-      // Step 3
       ScaffoldMessenger.of(context).showSnackBar(snackBar);
     } catch (e) {
-      // Other errors
+      // Diğer hatalar
     }
+
+    setState(() {
+      isLoading = false; // Yüklenme durumunu kapat
+    });
   }
 
   Widget _registerButton() => ElevatedButton(
         onPressed: () {
           if (_formkey.currentState!.validate()) {
             _formkey.currentState!.save();
-            signUpWithEmailAndPassword(
-                email, password); // call the function here
+            signUpWithEmailAndPassword(email, password);
           }
         },
         child: Text("Kayıt Ol"),

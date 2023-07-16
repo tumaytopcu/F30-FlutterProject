@@ -4,10 +4,19 @@ import 'package:flutter/material.dart';
 import 'dart:typed_data';
 import 'package:f30_bootcamp/pages/profilpage_utils.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:f30_bootcamp/pages/profilpage_add_data.dart';
 
 final _auth = FirebaseAuth.instance;
+
+GoogleSignIn _googleSignIn = GoogleSignIn(
+  // Optional clientId
+  clientId:
+      '558295029611-4h59dqvucjgon6ovnrnppqen3hien86j.apps.googleusercontent.com',
+  // clientId: 'your-client_id.apps.googleusercontent.com',
+  scopes: scopes,
+);
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
@@ -174,6 +183,12 @@ class _ProfilePageState extends State<ProfilePage> {
                           onPress: () async {
                             if (_auth.currentUser != null) {
                               await _auth.signOut();
+                              Navigator.of(context).pushReplacement(
+                                MaterialPageRoute(
+                                    builder: (context) => LoginPage()),
+                              );
+                            } else {
+                              await _googleSignIn.signOut();
                               Navigator.of(context).pushReplacement(
                                 MaterialPageRoute(
                                     builder: (context) => LoginPage()),
