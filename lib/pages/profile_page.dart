@@ -12,12 +12,14 @@ import 'package:f30_bootcamp/pages/profilpage_add_data.dart';
 final _auth = FirebaseAuth.instance;
 
 GoogleSignIn _googleSignIn = GoogleSignIn(
-  // Optional clientId
   clientId:
       '558295029611-4h59dqvucjgon6ovnrnppqen3hien86j.apps.googleusercontent.com',
-  // clientId: 'your-client_id.apps.googleusercontent.com',
-  scopes: scopes,
+  scopes: [
+    'email',
+    'https://www.googleapis.com/auth/contacts.readonly',
+  ],
 );
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
@@ -38,10 +40,6 @@ class ProfilePage extends StatefulWidget {
 
   @override
   _ProfilePageState createState() => _ProfilePageState();
-
-  Widget build(BuildContext context) {
-    return ProfilePage();
-  }
 }
 
 class _ProfilePageState extends State<ProfilePage> {
@@ -50,7 +48,7 @@ class _ProfilePageState extends State<ProfilePage> {
   final TextEditingController bioController = TextEditingController();
 
   void selectImage() async {
-    Uint8List img = await pickImage((ImageSource.gallery));
+    Uint8List? img = await pickImage(ImageSource.gallery);
     setState(() {
       _image = img;
     });
@@ -65,158 +63,161 @@ class _ProfilePageState extends State<ProfilePage> {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: Scaffold(
-        body: SafeArea(
-          child: Container(
-            alignment: Alignment.center,
-            color: Colors.white,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                const SizedBox(
-                  height: 24,
-                ),
-                Stack(
-                  children: [
-                    _image != null
-                        ? CircleAvatar(
-                            radius: 64,
-                            backgroundImage: MemoryImage(_image!),
-                          )
-                        : const CircleAvatar(
-                            radius: 64,
-                            backgroundImage: NetworkImage(
-                                'https://png.pngitem.com/pimgs/s/421-4212266_transparent-default-avatar-png-default-avatar-images-png.png'),
-                          ),
-                    Positioned(
-                      bottom: -10,
-                      left: 80,
-                      child: IconButton(
-                        onPressed: selectImage,
-                        icon: const Icon(Icons.add_a_photo,color: Color.fromRGBO(216, 46, 46, 1),),
+    return Scaffold(
+      body: SafeArea(
+        child: Container(
+          alignment: Alignment.center,
+          color: Colors.white,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              const SizedBox(
+                height: 24,
+              ),
+              Stack(
+                children: [
+                  _image != null
+                      ? CircleAvatar(
+                          radius: 64,
+                          backgroundImage: MemoryImage(_image!),
+                        )
+                      : const CircleAvatar(
+                          radius: 64,
+                          backgroundImage: NetworkImage(
+                              'https://png.pngitem.com/pimgs/s/421-4212266_transparent-default-avatar-png-default-avatar-images-png.png'),
+                        ),
+                  Positioned(
+                    bottom: -10,
+                    left: 80,
+                    child: IconButton(
+                      onPressed: selectImage,
+                      icon: const Icon(
+                        Icons.add_a_photo,
+                        color: Color.fromRGBO(216, 46, 46, 1),
                       ),
-                    )
-                  ],
-                ),
-                Padding(
-                  padding: EdgeInsets.all(10.0),
-                  child: Text(
-                    "Ad Soyad",
-                    style: TextStyle(
-                      fontSize: 20,
                     ),
                   ),
-                ),
-                ElevatedButton(
-                  onPressed: saveProfile,
-                  child: const Text('Save Profile'),
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: Color.fromRGBO(0, 191, 98, 1),
+                ],
+              ),
+              Padding(
+                padding: const EdgeInsets.all(10.0),
+                child: Text(
+                  "Ad Soyad",
+                  style: TextStyle(
+                    fontSize: 20,
                   ),
                 ),
-
-                SizedBox(
-                  height: 20,
+              ),
+              ElevatedButton(
+                onPressed: saveProfile,
+                child: const Text('Save Profile'),
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Color.fromRGBO(0, 191, 98, 1),
                 ),
-
-                // Profil sayfasından gidilecek sayfalara ait butonlar ve özellikleri
-
-                Expanded(
-                  child: ListView(
-                    children: [
-                      GestureDetector(
-                        onTap: () {
-                          // Ayarlar tıklama işlemini burada yönetebilirsiniz
-                        },
-                        child: ProfileMenuWidget(
-                          title: "Ayarlar",
-                          icon: Icons.settings_rounded,
-                          endIcon: true,
-                          onPress: () {},
-                        ),
+              ),
+              SizedBox(
+                height: 20,
+              ),
+              Expanded(
+                child: ListView(
+                  children: [
+                    GestureDetector(
+                      onTap: () {
+                        // Ayarlar tıklama işlemini burada yönetebilirsiniz
+                      },
+                      child: ProfileMenuWidget(
+                        title: "Ayarlar",
+                        icon: Icons.settings_rounded,
+                        endIcon: true,
+                        onPress: () {},
                       ),
-                      SizedBox(
-                        height: 10,
+                    ),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    GestureDetector(
+                      onTap: () {
+                        // Arkadaşlarını Davet Et tıklama işlemini burada yönetebilirsiniz
+                      },
+                      child: ProfileMenuWidget(
+                        title: "Arkadaşlarını Davet Et",
+                        icon: Icons.group_add,
+                        endIcon: true,
+                        onPress: () {},
                       ),
-                      GestureDetector(
-                        onTap: () {
-                          // Arkadaşlarını Davet Et tıklama işlemini burada yönetebilirsiniz
-                        },
-                        child: ProfileMenuWidget(
-                          title: "Arkadaşlarını Davet Et",
-                          icon: Icons.group_add,
-                          endIcon: true,
-                          onPress: () {},
-                        ),
-                      ),
-                      SizedBox(
-                        height: 10,
-                      ),
-                      GestureDetector(
-                        onTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(builder: (context) => YardimPage()),
-                          );// Yardım ve Destek tıklama işlemini burada yönetebilirsiniz
-                        },
-                        child: ProfileMenuWidget(
-                          title: "Yardım ve Destek",
-                          icon: Icons.support_agent,
-                          endIcon: true,
-                          onPress: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(builder: (context) => YardimPage()),
-                            );
-                          },
-                        ),
-                      ),
-                      SizedBox(
-                        height: 10,
-                      ),
-                      GestureDetector(
-                        onTap: () {
-                          // Çıkış Yap tıklama işlemini burada yönetebilirsiniz
+                    ),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => YardimPage()),
+                        );
+                        // Yardım ve Destek tıklama işlemini burada yönetebilirsiniz
+                      },
+                      child: ProfileMenuWidget(
+                        title: "Yardım ve Destek",
+                        icon: Icons.support_agent,
+                        endIcon: true,
+                        onPress: () {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) {
-                                return LoginPage();
-                              },
-                            ),
+                                builder: (context) => YardimPage()),
                           );
                         },
-                        child: ProfileMenuWidget(
-                          title: "Çıkış Yap",
-                          icon: Icons.logout,
-                          endIcon: true,
-                          onPress: () async {
-                            if (_auth.currentUser != null) {
-                              await _auth.signOut();
-                              Navigator.of(context).pushReplacement(
-                                MaterialPageRoute(
-                                    builder: (context) => LoginPage()),
-                              );
-                            } else {
-                              await _googleSignIn.signOut();
-                              Navigator.of(context).pushReplacement(
-                                MaterialPageRoute(
-                                    builder: (context) => LoginPage()),
-                              );
-                            }
-                          },
-                        ),
                       ),
-                      SizedBox(
-                        height: 10,
+                    ),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    GestureDetector(
+                      onTap: () async {
+                        // Çıkış Yap tıklama işlemini burada yönetebilirsiniz
+                        if (_auth.currentUser != null) {
+                          await _auth.signOut();
+                          Navigator.of(context).pushReplacement(
+                            MaterialPageRoute(
+                                builder: (context) => LoginPage()),
+                          );
+                        } else {
+                          await _googleSignIn.signOut();
+                          Navigator.of(context).pushReplacement(
+                            MaterialPageRoute(
+                                builder: (context) => LoginPage()),
+                          );
+                        }
+                      },
+                      child: ProfileMenuWidget(
+                        title: "Çıkış Yap",
+                        icon: Icons.logout,
+                        endIcon: true,
+                        onPress: () async {
+                          if (_auth.currentUser != null) {
+                            await _auth.signOut();
+                            Navigator.of(context).pushReplacement(
+                              MaterialPageRoute(
+                                  builder: (context) => LoginPage()),
+                            );
+                          } else {
+                            await _googleSignIn.signOut();
+                            Navigator.of(context).pushReplacement(
+                              MaterialPageRoute(
+                                  builder: (context) => LoginPage()),
+                            );
+                          }
+                        },
                       ),
-                    ],
-                  ),
-                )
-              ],
-            ),
+                    ),
+                    SizedBox(
+                      height: 10,
+                    ),
+                  ],
+                ),
+              )
+            ],
           ),
         ),
       ),
