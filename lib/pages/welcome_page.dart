@@ -43,7 +43,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
           },
           children: [
             Container(
-              color: Color.fromRGBO(0, 191, 98, 1),
+              color:  Color.fromRGBO(211, 211, 211, 1),
               child: Center(
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.start,
@@ -73,7 +73,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
               ),
             ),
             Container(
-              color: Color.fromRGBO(0, 191, 98, 1),
+              color:  Color.fromRGBO(211, 211, 211, 1),
               child: Center(
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.start,
@@ -100,7 +100,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
               ),
             ),
             Container(
-              color: Color.fromRGBO(0, 191, 98, 1),
+              color:  Color.fromRGBO(211, 211, 211, 1),
               child: Center(
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.start,
