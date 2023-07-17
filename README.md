@@ -96,3 +96,40 @@ Tahmini olarak Sprint içinde tamamlanacak puan: 390 Puan
  - Online toplantılarımızı sıklaştırma kararı alınmıştır.
  - Github kullanımımızı geliştirmek üzerine karar alınmıştır. 
 
+
+
+
+
+
+## Sprint 3
+Toplam tamamlanacak puanlar: 480
+Tahmini olarak Sprint içinde tamamlanacak puan: 270 Puan
+ - Puan tamamlama mantığı: Üçüncü sprintte 270 puan tamamlanması öngörülmüş, 220 puan tamamlanmıştır. Aşağıda sprintteki iş listemizi görebilirsiniz.
+ - ![sprint-3](https://github.com/tumaytopcu/F30-FlutterProject/assets/34829265/8be03279-f1f1-49ce-bf6e-ed3c9afb54df)
+ - Daily Scrum: https://docs.google.com/document/d/14t0k-wBChS1xkkr88MQrGSAHqFUcen8ALDubOBwjI14/edit?usp=sharing 
+ - Sprint Board Güncellemesi: ![image](https://github.com/tumaytopcu/F30-FlutterProject/assets/34829265/09f7d9fc-e343-4244-95fe-677e3319c34d)
+ - Ürün Durumu: Ürün içerisinde Onboarding, Login, Register, Şifremi Unuttum, Homepage ve oradan yönlendirmeyi düşündüğümüz diğer sayfalar ve son olarak profil page hazırlanmıştır.
+ - ![Medya (7)](https://github.com/tumaytopcu/F30-FlutterProject/assets/34829265/14ee03ff-6344-45dd-b4e1-54b18c6f0552)
+ - ![Medya (1)](https://github.com/tumaytopcu/F30-FlutterProject/assets/34829265/0119199d-0df1-4c35-be1b-1946f8aeef58)
+ - ![Medya (8)](https://github.com/tumaytopcu/F30-FlutterProject/assets/34829265/7a0acbec-b656-4a09-a7b6-6f4e1a914a7f)
+ - ![Medya (3)](https://github.com/tumaytopcu/F30-FlutterProject/assets/34829265/011f2c7d-f736-482f-85c8-e75094e18d3e)
+ - ![Medya (9)](https://github.com/tumaytopcu/F30-FlutterProject/assets/34829265/747c3c25-5afb-4066-8d57-7af6c93be2c2)
+ - ![Medya (6)](https://github.com/tumaytopcu/F30-FlutterProject/assets/34829265/f6728e0e-13a9-4936-a306-efc632770d56)
+ - ![Medya (4)](https://github.com/tumaytopcu/F30-FlutterProject/assets/34829265/3e6be2dc-4879-44be-b9b8-d391444eb175)
+ - ![Medya (2)](https://github.com/tumaytopcu/F30-FlutterProject/assets/34829265/7e185d54-9670-4325-85ac-31206c241321)
+
+
+
+#### Sprint Notu
+- UI ve backend kısımları son haline getirildi, testler tamamlandı. Son bir gün daha çalışmalara devam edilerek uygulamayı bootcampe uygun hale getirmiş olacağız. 
+
+#### Sprint Review
+ ##### Alınan kararlar: 
+ - Son düzenlemelerin yapılması, UI düzenleme, son testlerin gerçekleştirilmesi.   
+ ##### Sprint Review katılımcıları: 
+ - Tümay Topçu, Recep Arslan, Züleyha Akbaş, Ramazan Aydınlı
+
+#### Sprint Retrospective
+ - Hepimiz için çok güzel bir deneyim olduğuna karar verdik :)
+ - Bundan sonra da uygulamamızı geliştirmeye devam etmeye karar verdik.
+ - Uygulamaya mapin entegre edilmesiyle son haline ulaşmış olacağımıza karar verdik. 
