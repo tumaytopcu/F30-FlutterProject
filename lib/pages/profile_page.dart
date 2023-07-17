@@ -95,7 +95,7 @@ class _ProfilePageState extends State<ProfilePage> {
                       left: 80,
                       child: IconButton(
                         onPressed: selectImage,
-                        icon: const Icon(Icons.add_a_photo),
+                        icon: const Icon(Icons.add_a_photo,color: Color.fromRGBO(216, 46, 46, 1),),
                       ),
                     )
                   ],
@@ -112,6 +112,9 @@ class _ProfilePageState extends State<ProfilePage> {
                 ElevatedButton(
                   onPressed: saveProfile,
                   child: const Text('Save Profile'),
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Color.fromRGBO(0, 191, 98, 1),
+                  ),
                 ),
 
                 SizedBox(
