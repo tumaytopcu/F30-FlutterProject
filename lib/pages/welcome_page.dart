@@ -43,7 +43,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
           },
           children: [
             Container(
-              color: Colors.blue[300],
+              color:  Color.fromRGBO(211, 211, 211, 1),
               child: Center(
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.start,
@@ -73,7 +73,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
               ),
             ),
             Container(
-              color: Colors.blue[300],
+              color:  Color.fromRGBO(211, 211, 211, 1),
               child: Center(
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.start,
@@ -100,7 +100,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
               ),
             ),
             Container(
-              color: Colors.blue[300],
+              color:  Color.fromRGBO(211, 211, 211, 1),
               child: Center(
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.start,
@@ -141,7 +141,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                       _controller.jumpToPage(2);
                     },
                     //atla
-                    child: Text('Skip')),
+                    child: Text('Skip',style: TextStyle(fontWeight: FontWeight.bold),)),
 
                 //sayfanın altındaki noktalar
                 SmoothPageIndicator(controller: _controller, count: 3),
@@ -155,7 +155,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                         MaterialPageRoute(builder: (context) => LoginPage()),
                       );
                     },
-                    child: Text('Done'),
+                    child: Text('Done',style: TextStyle(fontWeight: FontWeight.bold),),
                   )
                 else
                   GestureDetector(
@@ -165,7 +165,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                           curve: Curves.easeIn);
                     },
                     //ileri
-                    child: Text('Next'),
+                    child: Text('Next',style: TextStyle(fontWeight: FontWeight.bold),),
                   )
               ],
             )),

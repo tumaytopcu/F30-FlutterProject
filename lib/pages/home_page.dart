@@ -24,18 +24,18 @@ class _HomePageState extends State<HomePage> {
   ];
 
   final List<String> _titles = [
-    'Wallet',
-    'Add',
-    'Search',
-    'Profile',
-    'Home',
+    'Cüzdanım',
+    'Haritalar',
+    'Aradığın Ürünü Bul',
+    'Profil Sayfam',
+    'Ürünler',
   ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(_titles[_currentIndex]),
+        title: Text(_titles[_currentIndex],style: TextStyle(fontWeight: FontWeight.bold,fontSize:25,fontStyle: FontStyle.normal)),backgroundColor: Color.fromRGBO(0, 191, 98, 1),
       ),
       body: _pages[_currentIndex],
       bottomNavigationBar: BottomAppBar(
@@ -48,7 +48,7 @@ class _HomePageState extends State<HomePage> {
             children: [
               IconButton(
                 icon: Icon(Icons.euro_symbol_outlined),
-                color: Colors.blueAccent,
+                color: Color.fromRGBO(0, 191, 98, 1),
                 onPressed: () {
                   setState(() {
                     _currentIndex = 0;
@@ -57,7 +57,7 @@ class _HomePageState extends State<HomePage> {
               ),
               IconButton(
                 icon: Icon(Icons.add_location_outlined),
-                color: Colors.blueAccent,
+                color: Color.fromRGBO(0, 191, 98, 1),
                 onPressed: () {
                   setState(() {
                     _currentIndex = 1;
@@ -67,7 +67,7 @@ class _HomePageState extends State<HomePage> {
               SizedBox(width: 40.0), // Boş bir widget
               IconButton(
                 icon: Icon(Icons.search),
-                color: Colors.blueAccent,
+                color: Color.fromRGBO(0, 191, 98, 1),
                 onPressed: () {
                   setState(() {
                     _currentIndex = 2;
@@ -76,7 +76,7 @@ class _HomePageState extends State<HomePage> {
               ),
               IconButton(
                 icon: Icon(Icons.person_2_outlined),
-                color: Colors.blueAccent,
+                color: Color.fromRGBO(0, 191, 98, 1),
                 onPressed: () {
                   setState(() {
                     _currentIndex = 3;
@@ -94,7 +94,7 @@ class _HomePageState extends State<HomePage> {
           });
         },
         child: Icon(Icons.home),
-        backgroundColor: Colors.blue,
+        backgroundColor: Color.fromRGBO(0, 191, 98, 1),
         foregroundColor: Colors.white,
         elevation: 2.0,
       ),

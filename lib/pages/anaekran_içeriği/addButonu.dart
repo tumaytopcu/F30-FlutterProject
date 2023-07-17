@@ -46,8 +46,8 @@ class _AddButonuState extends State<AddButonu> {
       debugShowCheckedModeBanner: false,
       home: Scaffold(
         appBar: AppBar(
-          title: const Text('Your Store'),
-          backgroundColor: Colors.green,
+          title: const Text('Kendi Ürününü Ekle'),
+          backgroundColor: Color.fromRGBO(0, 191, 98, 1),
         ),
         body: SafeArea(
           child: Container(
@@ -180,7 +180,7 @@ class _AddButonuState extends State<AddButonu> {
                               ),
                             ),
                             style: ElevatedButton.styleFrom(
-                              backgroundColor: Colors.green,
+                              backgroundColor: Color.fromRGBO(0, 191, 98, 1),
                             ),
                           ),
                           ElevatedButton(
@@ -195,7 +195,7 @@ class _AddButonuState extends State<AddButonu> {
                               ),
                             ),
                             style: ElevatedButton.styleFrom(
-                              backgroundColor: Colors.red[600],
+                              backgroundColor: Color.fromRGBO(216, 46, 46, 1),
                             ),
                           ),
                         ],

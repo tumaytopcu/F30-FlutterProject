@@ -3,7 +3,6 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'addButonu.dart';
 
-
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
@@ -18,9 +17,11 @@ class AnaEkran extends StatefulWidget {
 }
 
 class _AnaEkranState extends State<AnaEkran> {
-  final _userStream = FirebaseFirestore.instance.collection('users_data').snapshots();
+  final _userStream =
+      FirebaseFirestore.instance.collection('users_data').snapshots();
 
-  void _showBottomSheet(BuildContext context, String urun, String fiyat, String satici, String konum, String? imageURL) {
+  void _showBottomSheet(BuildContext context, String urun, String fiyat,
+      String satici, String konum, String? imageURL) {
     showModalBottomSheet(
       context: context,
       builder: (BuildContext context) {
@@ -32,9 +33,9 @@ class _AnaEkranState extends State<AnaEkran> {
               children: [
                 CircleAvatar(
                   radius: 64,
-                  backgroundImage: imageURL != null ?
-                  NetworkImage(imageURL) :
-                  AssetImage('assets/default_photo.jpg') as ImageProvider,
+                  backgroundImage: imageURL != null
+                      ? NetworkImage(imageURL)
+                      : AssetImage('assets/default_photo.jpg') as ImageProvider,
                 ),
                 Text(
                   urun,
@@ -64,7 +65,6 @@ class _AnaEkranState extends State<AnaEkran> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-
       body: StreamBuilder<QuerySnapshot>(
         stream: _userStream,
         builder: (context, snapshot) {
@@ -85,17 +85,19 @@ class _AnaEkranState extends State<AnaEkran> {
               String? imageURL = docs[index]['imageURL'];
               return InkWell(
                 onTap: () {
-                  _showBottomSheet(context, urun, fiyat, satici, konum, imageURL);
+                  _showBottomSheet(
+                      context, urun, fiyat, satici, konum, imageURL);
                 },
                 child: Card(
-                  color: Colors.white38,
+                  color: Color.fromRGBO(211, 211, 211, 1),
                   child: ListTile(
                     leading: CircleAvatar(
-                      backgroundImage: imageURL != null ?
-                      NetworkImage(imageURL) :
-                      AssetImage('assets/default_photo.jpg') as ImageProvider,
+                      backgroundImage: imageURL != null
+                          ? NetworkImage(imageURL)
+                          : AssetImage('assets/default_photo.jpg')
+                              as ImageProvider,
                     ),
-                    title: Text(urun),
+                    title: Text(urun,style: TextStyle(color: Colors.black,fontWeight: FontWeight.bold)),
                     subtitle: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -112,6 +114,7 @@ class _AnaEkranState extends State<AnaEkran> {
         },
       ),
       floatingActionButton: FloatingActionButton(
+        backgroundColor: Color.fromRGBO(216, 46, 46, 1),
         onPressed: () {
           Navigator.push(
             context,
@@ -128,7 +131,7 @@ final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
 class FirebaseService {
   final CollectionReference usersCol =
-  FirebaseFirestore.instance.collection("users_data");
+      FirebaseFirestore.instance.collection("users_data");
 
   Future<void> insertData({
     required String urun,
@@ -146,4 +149,3 @@ class FirebaseService {
     });
   }
 }
-

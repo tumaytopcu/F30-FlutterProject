@@ -79,7 +79,8 @@ class _SearchPageState extends State<SearchPage> {
                   });
                 },
                 decoration: InputDecoration(
-                  icon: Icon(Icons.search),
+                  icon:
+                      Icon(Icons.search, color: Color.fromRGBO(216, 46, 46, 1)),
                   labelText: 'Ürün Adı',
                   hintText: 'Aranacak ürünü girin',
                   labelStyle: TextStyle(
@@ -131,7 +132,7 @@ class _SearchPageState extends State<SearchPage> {
                                   : AssetImage('assets/default_photo.jpg')
                                       as ImageProvider,
                             ),
-                            title: Text(urun),
+                            title: Text(urun,style: TextStyle(color: Colors.black,fontWeight: FontWeight.bold)),
                             subtitle: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
