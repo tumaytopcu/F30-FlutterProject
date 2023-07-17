@@ -79,7 +79,8 @@ class _SearchPageState extends State<SearchPage> {
                   });
                 },
                 decoration: InputDecoration(
-                  icon: Icon(Icons.search),
+                  icon:
+                      Icon(Icons.search, color: Color.fromRGBO(216, 46, 46, 1)),
                   labelText: 'Ürün Adı',
                   hintText: 'Aranacak ürünü girin',
                   labelStyle: TextStyle(
