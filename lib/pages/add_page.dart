@@ -1,24 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:webview_flutter/webview_flutter.dart';
+
+//harita ekle
 
 class AddPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Icon(
-              Icons.add,
-              size: 48,
-            ),
-            SizedBox(height: 16),
-            Text(
-              'Welcome to the Add Page!',
-              style: TextStyle(fontSize: 24),
-            ),
-          ],
-        ),
+      body: WebView(
+        initialUrl: 'https://www.google.com/maps', // Google Haritalar'ın URL'si
+        javascriptMode: JavascriptMode.unrestricted,
       ),
     );
   }
