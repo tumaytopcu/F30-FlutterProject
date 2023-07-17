@@ -97,7 +97,7 @@ class _AnaEkranState extends State<AnaEkran> {
                           : AssetImage('assets/default_photo.jpg')
                               as ImageProvider,
                     ),
-                    title: Text(urun),
+                    title: Text(urun,style: TextStyle(color: Colors.black,fontWeight: FontWeight.bold)),
                     subtitle: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
