@@ -46,7 +46,7 @@ class _AddButonuState extends State<AddButonu> {
       debugShowCheckedModeBanner: false,
       home: Scaffold(
         appBar: AppBar(
-          title: const Text('Your Store'),
+          title: const Text('Kendi Ürününü Ekle'),
           backgroundColor: Color.fromRGBO(0, 191, 98, 1),
         ),
         body: SafeArea(
