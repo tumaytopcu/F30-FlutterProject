@@ -26,7 +26,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
         textTheme: GoogleFonts.openSansTextTheme().apply(
-          bodyColor: Colors.white, // Metin rengini beyaz yapar
+          bodyColor: Colors.black, // Metin rengini beyaz yapar
         ),
       ),
       home: FutureBuilder<bool>(
