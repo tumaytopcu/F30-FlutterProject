@@ -6,7 +6,7 @@ class WalletPage extends StatelessWidget {
     return Scaffold(
       body: Center(
         child: Text(
-          'Welcome to the Wallet Page!',
+          'Cüzdan, çok yakında..',
           style: TextStyle(fontSize: 24),
         ),
       ),
