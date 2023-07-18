@@ -29,13 +29,18 @@ class _HomePageState extends State<HomePage> {
     'Aradığın Ürünü Bul',
     'Profil Sayfam',
     'Ürünler',
+
   ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(_titles[_currentIndex],style: TextStyle(fontWeight: FontWeight.bold,fontSize:25,fontStyle: FontStyle.normal)),backgroundColor: Color.fromRGBO(0, 191, 98, 1),
+        title: Text(_titles[_currentIndex]),
+        backgroundColor: Color.fromRGBO(0, 191, 98, 1),
+        title: Text(_titles[_currentIndex],style: TextStyle(fontWeight: FontWeight.bold,fontSize:25,fontStyle: FontStyle.normal)),
+        backgroundColor: Color.fromRGBO(0, 191, 98, 1),
+
       ),
       body: _pages[_currentIndex],
       bottomNavigationBar: BottomAppBar(
